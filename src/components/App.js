@@ -1,10 +1,10 @@
 import React from "react"
-import GetLocation from "./getLocation"
+import WeatherContainer from "../containers/WeatherContainer"
 
 const App = () =>(
   <div>
     <h3>Weather App Goes Here</h3>
-    <GetLocation />
+    <WeatherContainer />
   </div>
 );
 
