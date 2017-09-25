@@ -10,7 +10,7 @@ class WeatherContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: tru
+      loading: true
     };
   }
 
