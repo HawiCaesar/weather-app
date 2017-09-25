@@ -1,14 +1,7 @@
-import axios from "axios";
+import LocationService from "../services/locationService";
+import WeatherService from "../services/weatherService";
 
 export function get_weather_info() {
-
-  let googlemapurl = "https://maps.googleapis.com/maps/api/geocode/json?";
-  let weatherapi = "https://api.openweathermap.org/data/2.5/weather?";
-
-  // const service = axios.create({
-  //   baseURL: googlemapurl
-  //
-  // });
 
   return function (dispatch) {
     dispatch({type: "FETCHING LOCATION INFO"});
@@ -25,32 +18,34 @@ export function get_weather_info() {
         dispatch({type: "LOCATION RESULTS"});
         dispatch({type: "FETCHING CITY INFO"});
 
-        return axios.get(`${googlemapurl}latlng=${lat},${lng}&key=AIzaSyAO26kNQBP2exWaVG0DIHGDhWQ2SelGIY0`)
-          .then(function (response) {
+        // Location Detail
+        return LocationService.get(`latlng=${lat},${lng}&key=${process.env.GOOGLE_KEY}`, (status, response) =>
 
-            dispatch({type: "FETCHED CITY INFO", payload: response.data});
+          dispatch({type: "FETCHED CITY INFO", payload: response.results}))
+          .then((response) => {
 
-            let split_values = response.data['results'][0]['formatted_address'];
+            let split_values = response.payload[0]['formatted_address'];
 
-            let values = split_values.split(",");
+            let city_name = split_values.split(", ");
 
-            return axios.get(`${weatherapi}q=${values[1]}&appid=1bc10c4306570d86e35d3e172ab6bedb`).then(
-              function (response) {
+            // Weather Detail
+            return WeatherService.get(`q=${city_name[1]}&appid=${process.env.WEATHER_API_KEY}`, (status, response) =>
 
-                dispatch({type: "FETCHED WEATHER INFO", payload: response.data});
+              dispatch({type: "FETCHED WEATHER INFO", payload: response}))
 
-              }).catch((err) => {
+              .catch((error) => {
 
-              dispatch({type: "FAILED FETCHING WEATHER INFO", payload: err});
-            });
+                dispatch({type: "FAILED FETCHING WEATHER INFO", payload: error});
+              });
 
 
-            //dispatch(hideLoading())
+          })
+          .catch((error) => {
 
-          }).catch((err) => {
+              dispatch({type: "FAILED FETCHING CITY INFO", payload: error});
+            }
+          );
 
-            dispatch({type: "FAILED FETCHING CITY INFO", payload: err});
-          });
 
       });
 
