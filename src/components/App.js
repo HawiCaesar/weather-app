@@ -1,11 +1,17 @@
-import React from "react"
-import WeatherContainer from "../containers/WeatherContainer"
+import React from "react";
+import WeatherContainer from "../containers/WeatherContainer";
+import styles from  "../style.css";
 
-const App = () =>(
+const App = () => (
   <div>
-    <h3>Weather App Goes Here</h3>
-    <WeatherContainer />
+    <nav className="navbar navbar-default">
+      <div className={styles.navbarh}>
+        <a className="navbar-brand" href="#">Weather Info</a>
+      </div>
+    </nav>
+    <WeatherContainer styles={styles.loadbar}/>
   </div>
 );
+
 
 export default App;
