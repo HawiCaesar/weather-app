@@ -1,12 +1,18 @@
 import React from "react";
 import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
-import PropTypes from "prop-types";
 
 import Weather from "../components/Weather";
 import { get_weather_info } from "../actions/weatherActions";
 
 class WeatherContainer extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: tru
+    };
+  }
 
   componentWillMount() {
 
@@ -14,14 +20,20 @@ class WeatherContainer extends React.Component {
   }
 
   render(){
-    return (<Weather />);
+    return (
+          <Weather loading={this.state.loading}
+                   weather_details={this.props.weather_details}
+                   styles={this.props.styles}
+
+          />
+    );
   }
 
 }
 
 function mapStateToProps(state) {
   return {
-    weather_details: state.weather_info
+    weather_details: state.weather
 
   };
 }
