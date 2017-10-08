@@ -27,7 +27,8 @@ export default {
       'process.env.API_LOCATION_URL': JSON.stringify(process.env.API_LOCATION_URL),
       'process.env.GOOGLE_KEY': JSON.stringify(process.env.GOOGLE_KEY),
       'process.env.API_WEATHER_URL': JSON.stringify(process.env.API_WEATHER_URL),
-      'process.env.WEATHER_API_KEY': JSON.stringify(process.env.WEATHER_API_KEY)
+      'process.env.WEATHER_API_KEY': JSON.stringify(process.env.WEATHER_API_KEY),
+      'process.env.WEATHER_ICON_URL': JSON.stringify(process.env.WEATHER_ICON_URL)
 
     }),
     new ExtractTextPlugin("./src/style.css")
