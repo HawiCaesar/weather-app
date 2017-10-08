@@ -1,7 +1,7 @@
 import React from "react";
 import {CircleLoader} from 'react-spinners';
 
-import WeatherForcast from "./WeatherForcast";
+import WeatherForecast from "./WeatherForecast";
 
 class Weather extends React.Component {
 
@@ -9,7 +9,7 @@ class Weather extends React.Component {
 
     if (this.props.weather_details.fetched_city !=="" && this.props.weather_details.fetched_weather !== false){
         return (
-          <WeatherForcast forecast={this.props.weather_details} />
+          <WeatherForecast forecast={this.props.weather_details} />
         );
     }
 
