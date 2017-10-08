@@ -37,19 +37,13 @@ export function get_weather_info() {
 
                 dispatch({type: "FAILED FETCHING WEATHER INFO", payload: error});
               });
-
-
           })
           .catch((error) => {
 
               dispatch({type: "FAILED FETCHING CITY INFO", payload: error});
             }
           );
-
-
       });
-
-
     }
     else {
       // geolocation is not supported
