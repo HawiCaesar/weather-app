@@ -18,7 +18,6 @@ class WeatherService {
   }
 
   handleError(error) {
-    console.log(error);
     return Promise.reject(error);
   }
 
@@ -27,7 +26,7 @@ class WeatherService {
 
     return this.service.request({
       method: 'GET',
-      url: 'weather?'+path,
+      url: 'forecast?'+path,
       responseType: 'json'
     }).then(response => callback(response.status, response.data));
   }
