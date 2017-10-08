@@ -1,28 +1,29 @@
 import React from "react";
 import {CircleLoader} from 'react-spinners';
 
+import WeatherForcast from "./WeatherForcast";
+
 class Weather extends React.Component {
 
   show_weather_info(){
 
     if (this.props.weather_details.fetched_city !=="" && this.props.weather_details.fetched_weather !== false){
         return (
-          <div>
-            <p>Today's Weather</p>
-          </div>
-
+          <WeatherForcast forecast={this.props.weather_details} />
         );
     }
 
    return (
-     <div>
-       <CircleLoader
-         color={'#363CD7'}
-         size={'120'}
-         loading={this.props.loading}
-       />
-       <p>Got Your Location</p>
-     </div>
+        <div>
+         <div className={this.props.styles.loadbar}>
+           <CircleLoader
+             color={'#363CD7'}
+             size={'120'}
+             loading={this.props.loading}
+           />
+         </div>
+          <p className="text-center">Got Your Location</p>
+        </div>
    );
 
   }
@@ -32,16 +33,18 @@ class Weather extends React.Component {
     if (this.props.weather_details.fetched_location === false) {
 
       return (
-        <CircleLoader
-          color={'#363CD7'}
-          size={'120'}
-          loading={this.props.loading}
-        />
+        <div className={this.props.styles.loadbar}>
+          <CircleLoader
+            color={'#363CD7'}
+            size={'120'}
+            loading={this.props.loading}
+          />
+        </div>
       );
     }
 
     return(
-      <div>
+      <div className={this.props.styles.weatherinfo}>
 
         {this.show_weather_info()}
 
@@ -54,9 +57,7 @@ class Weather extends React.Component {
 
     return (
       <div>
-        <div className={this.props.styles}>
           {this.show_location()}
-        </div>
       </div>
     );
   }
