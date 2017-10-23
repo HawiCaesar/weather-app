@@ -5,10 +5,13 @@ export default function (state = {
   fetched_city: "",
   fetching_city: false,
   city_error: null,
-  fetched_weather: false,
-  fetching_weather: false,
-  weather_error: null,
-  weather_data: null
+  forecast_weather: false,
+  fetching_error: null,
+  forecast_error: null,
+  forecast_data: null,
+  current_weather: null,
+  current_weather_error: null
+
 }, action) {
 
   switch (action.type) {
@@ -36,12 +39,17 @@ export default function (state = {
       return {...state, city_error: action.payload};
 
 
-    case "FETCHED WEATHER INFO":
-      return {...state, fetched_weather: true, weather_data: action.payload};
+    case "FETCHED WEATHER FORECAST INFO":
+      return {...state, forecast_weather: true, forecast_data: action.payload };
 
+    case "FETCHED CURRENT WEATHER INFO":
+      return {...state, current_weather:action.payload };
 
     case "FAILED FETCHING WEATHER INFO":
-      return {...state, fetched_weather: false, weather_error: action.payload};
+      return {...state, current_weather_error: true, fetching_error: action.payload };
+
+    case "FAILED FETCHING WEATHER FORECAST INFO":
+      return {...state, forecast_weather: false, forecast_error: action.payload};
 
   }
 

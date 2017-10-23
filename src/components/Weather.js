@@ -7,9 +7,13 @@ class Weather extends React.Component {
 
   show_weather_info(){
 
-    if (this.props.weather_details.fetched_city !=="" && this.props.weather_details.fetched_weather !== false){
+    if (this.props.weather_details.fetched_city !=="" &&
+        this.props.weather_details.current_weather !== null &&
+        this.props.weather_details.forecast_data !== null) {
         return (
-          <WeatherForecast forecast={this.props.weather_details} />
+          <WeatherForecast city={this.props.weather_details.fetched_city}
+                           current_weather={this.props.weather_details.current_weather}
+                           forecast={this.props.weather_details.forecast_data.data} />
         );
     }
 

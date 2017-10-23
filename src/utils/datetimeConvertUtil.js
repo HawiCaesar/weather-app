@@ -1,6 +1,22 @@
-export default function convertToDate(unixTimeStamp){
+const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-  let time = unixTimeStamp.split(" ");
+export const convertDateToText = (unixTimeStamp) => {
+  return unixTimeStamp.split(" ");
+};
 
-  return time[1];
-}
+export const convertUTCToLocal = (unixTimeStamp) => {
+  let date = new Date(0);
+  date.setUTCSeconds(unixTimeStamp);
+
+  return days[date.getDay()];
+};
+
+export const getCurrentDate = () => {
+  let date = new Date();
+  let month = date.getMonth()+1;
+
+  if(month < 10){
+    month = '0'+month;
+  }
+  return date.getFullYear()+'-'+month+'-'+date.getDate();
+};

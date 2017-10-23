@@ -28,15 +28,22 @@ export function get_weather_info() {
 
             let city_name = split_values.split(", ");
 
-            // Weather Detail
-            return WeatherService.get(`q=${city_name[1]}&appid=${process.env.WEATHER_API_KEY}`, (status, response) =>
+            // Current Weather
+            return WeatherService.getCurrent(`q=${city_name[1]}&appid=${process.env.WEATHER_API_KEY}`)
+              .then((response) => {
+                  dispatch({type: "FETCHED CURRENT WEATHER INFO", payload: response});
 
-              dispatch({type: "FETCHED WEATHER INFO", payload: response}))
+                  // Forecast
+                  return WeatherService.getForecast(`q=${city_name[1]}&appid=${process.env.WEATHER_API_KEY}`)
+                    .then((response) => {
+                      dispatch({type: "FETCHED WEATHER FORECAST INFO", payload: response});
+                  }).catch((error) => {
+                      dispatch({type: "FAILED FETCHING WEATHER FORECAST INFO", payload: error});
+                  });
 
-              .catch((error) => {
-
+            }).catch((error) =>{
                 dispatch({type: "FAILED FETCHING WEATHER INFO", payload: error});
-              });
+            });
           })
           .catch((error) => {
 

@@ -22,13 +22,21 @@ class WeatherService {
   }
 
 
-  get(path, callback) {
+  getForecast(path) {
 
     return this.service.request({
       method: 'GET',
       url: 'forecast?'+path,
       responseType: 'json'
-    }).then(response => callback(response.status, response.data));
+    });
+  }
+
+  getCurrent(path) {
+    return this.service.request({
+      method: 'GET',
+      url: 'weather?'+path,
+      responseType: 'json'
+    });
   }
 
 }
