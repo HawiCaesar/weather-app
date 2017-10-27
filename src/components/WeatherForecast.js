@@ -1,11 +1,11 @@
 import React from "react";
 
-import { convertDateToText, convertUTCToLocal, getCurrentDate } from "../utils/datetimeConvertUtil";
+import { convertDateToText, convertUTCToLocal, getCurrentDateTime } from "../utils/datetimeConvertUtil";
 import kelvinToCelsius  from "../utils/kelvinToCelsius";
 
 class WeatherForecast extends React.Component {
 
-  render(){
+render(){
 
     /**
      *
@@ -15,6 +15,8 @@ class WeatherForecast extends React.Component {
   const showCurrentWeather = (weather) => {
     return (
       <div>
+        <p className="text-center">{convertUTCToLocal(this.props.current_weather.data.dt)[0]} Today</p>
+        <p className="text-center">Weather Now</p>
         <img src={ process.env.WEATHER_ICON_URL+weather.weather[0].icon+'.png'} />
         <p>HI { kelvinToCelsius(weather.main.temp_max) }</p>
         <p>LO { kelvinToCelsius(weather.main.temp_min) }</p>
@@ -22,21 +24,26 @@ class WeatherForecast extends React.Component {
     );
   };
 
-    /**
-     *
-     * @param forecast
-     * @return {XML}
-     */
-  const showThreeHourForecast = (forecast) => {
-    return (
-      <div>
-        <p>Weather At { convertDateToText(forecast.dt_txt)[1] }</p>
-        <img src={ process.env.WEATHER_ICON_URL+forecast.weather[0].icon+'.png'} />
-        <p>HI { kelvinToCelsius(forecast.main.temp_max) }</p>
-        <p>LO { kelvinToCelsius(forecast.main.temp_min) }</p>
-      </div>
-    );
-  };
+  /**
+   *
+   * @param forecasts
+   */
+  const showThreeHourForecast = (forecasts) => {
+
+    return forecasts.map(forecast => {
+      // dates are equal
+      if(convertDateToText(forecast.dt_txt)[0] === getCurrentDateTime()[0]) {
+          return (
+            <div key={forecast.dt} className="col-sm-3 text-center">
+              <p>Weather At {convertDateToText(forecast.dt_txt)[1]}</p>
+              <img src={process.env.WEATHER_ICON_URL + forecast.weather[0].icon + '.png'}/>
+              <p>HI {kelvinToCelsius(forecast.main.temp_max)}</p>
+              <p>LO {kelvinToCelsius(forecast.main.temp_min)}</p>
+            </div>
+          );
+        }
+    });
+};
 
     /**
      *
@@ -44,11 +51,11 @@ class WeatherForecast extends React.Component {
      */
   const showFiveDayForecast = (forecasts) => {
     return forecasts.map(forecast => {
-      if(convertDateToText(forecast.dt_txt)[0] !== getCurrentDate()){
+      if(convertDateToText(forecast.dt_txt)[0] !== getCurrentDateTime()[0]){
           if(convertDateToText(forecast.dt_txt)[1] === '12:00:00'){
             return(
               <div key={forecast.dt} className="col-sm-3 text-center">
-                <p>{convertUTCToLocal(forecast.dt)}</p>
+                <p>{convertUTCToLocal(forecast.dt)[0]}</p>
                 <img src={ process.env.WEATHER_ICON_URL+forecast.weather[0].icon+'.png'} />
                 <p>HI { kelvinToCelsius(forecast.main.temp_max) }</p>
                 <p>LO { kelvinToCelsius(forecast.main.temp_min) }</p>
@@ -63,25 +70,13 @@ class WeatherForecast extends React.Component {
       <div>
         <div className="jumbotron">
           <h2 className="text-center">3 hour Weather Forecast { this.props.city }</h2>
-          <p className="text-center">Weather Now</p>
           <div className="text-center">
             {showCurrentWeather(this.props.current_weather.data)}
           </div>
         </div>
         <div className="container" style={{ width: '100%'}}>
           <div className="row">
-              <div className="col-sm-3 text-center">
-                { showThreeHourForecast(this.props.forecast.list[1]) }
-              </div>
-              <div className="col-sm-3 text-center">
-                { showThreeHourForecast(this.props.forecast.list[2]) }
-              </div>
-              <div className="col-sm-3 text-center">
-                { showThreeHourForecast(this.props.forecast.list[3]) }
-              </div>
-              <div className="col-sm-3 text-center">
-                { showThreeHourForecast(this.props.forecast.list[4]) }
-              </div>
+                { showThreeHourForecast(this.props.forecast.list) }
           </div>
           <div className="row">
             <div className="jumbotron">
