@@ -6,7 +6,7 @@ const App = () => (
   <div>
     <nav className="navbar navbar-default">
       <div className={styles.navbarh}>
-        <a className="navbar-brand" href="#">Weather Info</a>
+        <a className="navbar-brand" href="#">Weather App</a>
       </div>
     </nav>
     <WeatherContainer styles={styles}/>

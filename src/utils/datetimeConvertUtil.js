@@ -4,7 +4,7 @@ export const convertDateToText = (unixTimeStamp) => {
   return unixTimeStamp.split(" ");
 };
 
-export const convertUTCToLocal = (unixTimeStamp) => {
+export const milisecondsToDateTime = (unixTimeStamp) => {
   let date = new Date(0);
   date.setUTCSeconds(unixTimeStamp);
 
@@ -26,7 +26,6 @@ export const convertUTCToLocal = (unixTimeStamp) => {
 
   return [days[date.getDay()], time];
 };
-
 
 export const getCurrentDateTime = () => {
   let date = new Date();

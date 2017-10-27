@@ -1,6 +1,6 @@
 import React from "react";
 
-import { convertDateToText, convertUTCToLocal, getCurrentDateTime } from "../utils/datetimeConvertUtil";
+import { convertDateToText, milisecondsToDateTime, getCurrentDateTime } from "../utils/datetimeConvertUtil";
 import kelvinToCelsius  from "../utils/kelvinToCelsius";
 
 class WeatherForecast extends React.Component {
@@ -15,7 +15,7 @@ render(){
   const showCurrentWeather = (weather) => {
     return (
       <div>
-        <p className="text-center">{convertUTCToLocal(this.props.current_weather.data.dt)[0]} Today</p>
+        <p className="text-center">{milisecondsToDateTime(this.props.current_weather.data.dt)[0]} Today</p>
         <p className="text-center">Weather Now</p>
         <img src={ process.env.WEATHER_ICON_URL+weather.weather[0].icon+'.png'} />
         <p>HI { kelvinToCelsius(weather.main.temp_max) }</p>
@@ -55,7 +55,7 @@ render(){
           if(convertDateToText(forecast.dt_txt)[1] === '12:00:00'){
             return(
               <div key={forecast.dt} className="col-sm-3 text-center">
-                <p>{convertUTCToLocal(forecast.dt)[0]}</p>
+                <p>{milisecondsToDateTime(forecast.dt)[0]}</p>
                 <img src={ process.env.WEATHER_ICON_URL+forecast.weather[0].icon+'.png'} />
                 <p>HI { kelvinToCelsius(forecast.main.temp_max) }</p>
                 <p>LO { kelvinToCelsius(forecast.main.temp_min) }</p>
