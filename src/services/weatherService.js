@@ -1,5 +1,8 @@
 import axios from 'axios';
 
+/**
+ * Weather Service
+ */
 class WeatherService {
   constructor() {
 
@@ -21,7 +24,12 @@ class WeatherService {
     return Promise.reject(error);
   }
 
-
+  /**
+   * Fetch forecast weather from API
+   *
+   * @param path
+   * @return {AxiosPromise}
+   */
   getForecast(path) {
 
     return this.service.request({
@@ -31,6 +39,12 @@ class WeatherService {
     });
   }
 
+  /**
+   * Fetch current weather from API
+   *
+   * @param path
+   * @return {AxiosPromise}
+   */
   getCurrent(path) {
     return this.service.request({
       method: 'GET',
@@ -38,7 +52,5 @@ class WeatherService {
       responseType: 'json'
     });
   }
-
 }
-
 export default new WeatherService();

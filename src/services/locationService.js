@@ -1,5 +1,8 @@
 import axios from 'axios';
 
+/**
+ * Location Service
+ */
 class LocationService {
   constructor() {
 
@@ -18,11 +21,16 @@ class LocationService {
   }
 
   handleError(error) {
-    console.log(error);
     return Promise.reject(error);
   }
 
-
+  /**
+   * Fetch current location
+   *
+   * @param path - url with coordinates
+   * @param callback
+   * @return {Promise.<TResult>}
+   */
   get(path, callback) {
 
     return this.service.request({
@@ -30,9 +38,7 @@ class LocationService {
       url: "json?"+path,
       responseType: 'json'
     }).then(response => callback(response.status, response.data));
-
   }
-
 }
 
 export default new LocationService();

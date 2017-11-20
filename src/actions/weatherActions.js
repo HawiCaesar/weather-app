@@ -8,9 +8,7 @@ export function get_weather_info() {
 
     if (navigator.geolocation) {
       // geolocation is available
-
       navigator.geolocation.getCurrentPosition(function (position) {
-
         // Get the coordinates of the current position.
         let lat = position.coords.latitude;
         let lng = position.coords.longitude;
@@ -23,9 +21,7 @@ export function get_weather_info() {
 
           dispatch({type: "FETCHED CITY INFO", payload: response.results}))
           .then((response) => {
-
             let split_values = response.payload[0]['formatted_address'];
-
             let city_name = split_values.split(", ");
 
             // Current Weather

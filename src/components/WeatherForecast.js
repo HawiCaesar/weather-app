@@ -1,6 +1,11 @@
+// react library
 import React from "react";
 
-import { convertDateToText, milisecondsToDateTime, getCurrentDateTime } from "../utils/datetimeConvertUtil";
+// helpers
+import { convertDateToText,
+  milisecondsToDateTime,
+  getCurrentDateTime
+} from "../utils/datetimeConvertUtil";
 import kelvinToCelsius  from "../utils/kelvinToCelsius";
 
 class WeatherForecast extends React.Component {
@@ -25,6 +30,7 @@ render(){
   };
 
   /**
+   * Render 3 hour forecast via loop
    *
    * @param forecasts
    */
@@ -46,6 +52,7 @@ render(){
 };
 
     /**
+     * Render 5 day forecast via loop
      *
      * @param forecasts
      */
@@ -88,6 +95,5 @@ render(){
       </div>
     );
   }
-
 }
 export default WeatherForecast;

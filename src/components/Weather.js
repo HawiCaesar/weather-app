@@ -1,10 +1,18 @@
+// react library
 import React from "react";
-import {CircleLoader} from 'react-spinners';
 
+// third party library
+import { CircleLoader } from 'react-spinners';
+
+// component
 import WeatherForecast from "./WeatherForecast";
 
 class Weather extends React.Component {
-
+  /**
+   * Render WeatherForecast if checks pass. If not WeatherForecast, render loader
+   *
+   * @return {XML}
+   */
   show_weather_info(){
 
     if (this.props.weather_details.fetched_city !=="" &&
@@ -32,10 +40,12 @@ class Weather extends React.Component {
 
   }
 
+  /**
+   * Render weather info if location is found. If not location render loader
+   * @return {XML}
+   */
   show_location(){
-
     if (this.props.weather_details.fetched_location === false) {
-
       return (
         <div className={this.props.styles.loadbar}>
           <CircleLoader
@@ -49,23 +59,17 @@ class Weather extends React.Component {
 
     return(
       <div className={this.props.styles.weatherinfo}>
-
         {this.show_weather_info()}
-
       </div>
     );
-
   }
 
   render() {
-
     return (
       <div>
           {this.show_location()}
       </div>
     );
   }
-
 }
-
 export default Weather;

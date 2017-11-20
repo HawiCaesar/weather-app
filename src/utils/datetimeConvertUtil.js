@@ -1,9 +1,20 @@
 const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
+/**
+ *
+ * @param unixTimeStamp
+ * @return {Array}
+ */
 export const convertDateToText = (unixTimeStamp) => {
   return unixTimeStamp.split(" ");
 };
 
+/**
+ * converts miliseconds to date time
+ *
+ * @param unixTimeStamp
+ * @return {[days,time]}
+ */
 export const milisecondsToDateTime = (unixTimeStamp) => {
   let date = new Date(0);
   date.setUTCSeconds(unixTimeStamp);
@@ -27,6 +38,11 @@ export const milisecondsToDateTime = (unixTimeStamp) => {
   return [days[date.getDay()], time];
 };
 
+/**
+ * Gets the current date and time
+ *
+ * @return {[date,time]}
+ */
 export const getCurrentDateTime = () => {
   let date = new Date();
   let month = date.getMonth()+1;
