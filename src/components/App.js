@@ -1,10 +1,15 @@
-import React from "react"
-import GetLocation from "./getLocation"
+import React from "react";
+import WeatherContainer from "../containers/WeatherContainer";
+import styles from  "../style.css";
 
-const App = () =>(
+const App = () => (
   <div>
-    <h3>Weather App Goes Here</h3>
-    <GetLocation />
+    <nav className="navbar navbar-default">
+      <div className={styles.navbarh}>
+        <a className="navbar-brand" href="#">Weather App</a>
+      </div>
+    </nav>
+    <WeatherContainer styles={styles}/>
   </div>
 );
 
