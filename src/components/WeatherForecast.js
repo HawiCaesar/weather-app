@@ -2,7 +2,8 @@
 import React from "react";
 
 // helpers
-import { convertDateToText,
+import {
+  convertDateToText,
   milisecondsToDateTime,
   getCurrentDateTime
 } from "../utils/datetimeConvertUtil";
@@ -13,6 +14,7 @@ class WeatherForecast extends React.Component {
 render(){
 
     /**
+     * Render current weather
      *
      * @param weather
      * @return {XML}
@@ -49,7 +51,7 @@ render(){
           );
         }
     });
-};
+  };
 
     /**
      * Render 5 day forecast via loop
@@ -62,10 +64,10 @@ render(){
           if(convertDateToText(forecast.dt_txt)[1] === '12:00:00'){
             return(
               <div key={forecast.dt} className="col-sm-3 text-center">
-                <p>{milisecondsToDateTime(forecast.dt)[0]}</p>
+                <p><b>{milisecondsToDateTime(forecast.dt)[0]}</b></p>
                 <img src={ process.env.WEATHER_ICON_URL+forecast.weather[0].icon+'.png'} />
-                <p>HI { kelvinToCelsius(forecast.main.temp_max) }</p>
-                <p>LO { kelvinToCelsius(forecast.main.temp_min) }</p>
+                <p>HI {kelvinToCelsius(forecast.main.temp_max)}</p>
+                <p>LO {kelvinToCelsius(forecast.main.temp_min)}</p>
               </div>
             );
           }
@@ -76,14 +78,14 @@ render(){
     return(
       <div>
         <div className="jumbotron">
-          <h2 className="text-center">3 hour Weather Forecast { this.props.city }</h2>
+          <h2 className="text-center">3 hour Weather Forecast {this.props.city}</h2>
           <div className="text-center">
             {showCurrentWeather(this.props.current_weather.data)}
           </div>
         </div>
         <div className="container" style={{ width: '100%'}}>
           <div className="row">
-                { showThreeHourForecast(this.props.forecast.list) }
+                {showThreeHourForecast(this.props.forecast.list)}
           </div>
           <div className="row">
             <div className="jumbotron">

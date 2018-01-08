@@ -14,18 +14,18 @@ class Weather extends React.Component {
    * @return {XML}
    */
   show_weather_info(){
-
     if (this.props.weather_details.fetched_city !=="" &&
         this.props.weather_details.current_weather !== null &&
         this.props.weather_details.forecast_data !== null) {
         return (
-          <WeatherForecast city={this.props.weather_details.fetched_city}
-                           current_weather={this.props.weather_details.current_weather}
-                           forecast={this.props.weather_details.forecast_data.data} />
+          <WeatherForecast
+            city={this.props.weather_details.fetched_city}
+            current_weather={this.props.weather_details.current_weather}
+            forecast={this.props.weather_details.forecast_data.data}
+          />
         );
     }
-
-   return (
+    return (
         <div>
          <div className={this.props.styles.loadbar}>
            <CircleLoader
@@ -36,8 +36,7 @@ class Weather extends React.Component {
          </div>
           <p className="text-center">Got Your Location</p>
         </div>
-   );
-
+    );
   }
 
   /**
