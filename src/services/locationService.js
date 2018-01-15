@@ -31,13 +31,12 @@ class LocationService {
    * @param callback
    * @return {Promise.<TResult>}
    */
-  get(path, callback) {
-
+  get(path) {
     return this.service.request({
       method: 'GET',
       url: "json?"+path,
       responseType: 'json'
-    }).then(response => callback(response.status, response.data));
+    });
   }
 }
 
