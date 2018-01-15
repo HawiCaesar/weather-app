@@ -2,43 +2,52 @@
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
 import expect from 'expect';
-import * as moxios from 'moxios';
-import * as jest from 'jest';
+import axios from 'axios';
+import sinon from 'sinon';
 
 // actions
 import { getLocationInfo } from "./weatherActions";
 
-let middlewares = [thunk];
-let mockStore = configureMockStore(middlewares);
-let store;
-let weatherForecastUrl;
-let currentWeatherUrl;
+let sandbox;
+let server;
 
 describe('Weather actions', () => {
 
   beforeEach(() => {
-    moxios.install();
-    store = mockStore({});
-    weatherForecastUrl = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=-1.2972971,36.7889906&key=AIzaSyAO26kNQBP2exWaVG0DIHGDhWQ2SelGIY0';
+    sandbox = sinon.sandbox.create();
+    server = sandbox.useFakeServer();
+
   });
 
   afterEach(() => {
-    moxios.uninstall();
+    server.restore();
+    sandbox.restore();
   });
+
   it('should create FETCHING_LOCATION_INFO and LOCATION_RESULTS and FETCHED_CITY_INFO', (done) => {
+
+    let middlewares = [thunk];
+    let mockStore = configureMockStore(middlewares);
+    let store = mockStore({});
+
+    const resolvedSucess = new Promise(
+      (resolve, reject) => resolve({
+        data: {
+          results: [
+            {
+              formatted_address: "Mirema Rd, Nairobi, Kenya"
+            }
+          ]
+        }
+      }));
+
+    sandbox.stub(axios, 'get').returns(resolvedSucess);
 
     const expectedActions = [
       { type: "FETCHING_LOCATION_INFO" },
       { type: "LOCATION_RESULTS" },
       { type: "FETCHED_CITY_INFO"}
     ];
-
-    moxios.stubRequest(`${weatherForecastUrl}`, {
-      status: 200,
-      response: { data: { results: { formatted_address: "Mirema Rd, Nairobi, Kenya"}
-
-      } }
-    });
 
     store.dispatch(getLocationInfo(-1.2177265,36.8829831)).then(() => {
        const actualActions = store.getActions();
@@ -51,12 +60,27 @@ describe('Weather actions', () => {
   });
 
   it('should create FAILED_FETCHING_CITY_INFO', (done) => {
+
+    let middlewares = [thunk];
+    let mockStore = configureMockStore(middlewares);
+    let store = mockStore({});
+
+    const rejectError = new Promise(
+      (resolve, reject) => reject({
+        data: {
+          results: []
+        }
+      }));
+
+    sandbox.stub(axios, 'get').returns(rejectError);
+
     const expectedActions = [
       { type: "FAILED_FETCHING_CITY_INFO" }
     ];
 
-    store.dispatch(getLocationInfo('-','-')).then(() => {
+    store.dispatch(getLocationInfo(0,0)).then(() => {
       const actualActions = store.getActions();
+
       expect(expectedActions[0].type).toEqual(actualActions[1].type);
       done();
     });

@@ -1,5 +1,5 @@
-import LocationService from "../services/locationService";
 import WeatherService from "../services/weatherService";
+import axios from 'axios';
 
 /**
  * Get city of the current location -  thunk
@@ -11,7 +11,7 @@ import WeatherService from "../services/weatherService";
 export const getLocationInfo = (lat, lng) => {
   return ((dispatch) => {
     dispatch({ type: "FETCHING_LOCATION_INFO" });
-    return LocationService.get(`latlng=${lat},${lng}&key=${process.env.GOOGLE_KEY}`)
+    return axios.get(process.env.API_LOCATION_URL+`/json?latlng=${lat},${lng}&key=${process.env.GOOGLE_KEY}`)
       .then((response) => {
         dispatch({ type: "LOCATION_RESULTS" });
         dispatch({ type: "FETCHED_CITY_INFO", payload: response.data.results });
@@ -27,7 +27,6 @@ export const getLocationInfo = (lat, lng) => {
 /**
  * Get current weather information - thunk
  *
- * @param dispatch
  * @param cityName
  * @return {Function}
  */
