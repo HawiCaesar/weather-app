@@ -6,7 +6,7 @@ import axios from 'axios';
 import sinon from 'sinon';
 
 // actions
-import { getLocationInfo } from "./weatherActions";
+import { getLocationInfo, getCurrentWeather } from "./weatherActions";
 
 let sandbox;
 let server;
@@ -49,7 +49,7 @@ describe('Weather actions', () => {
       { type: "FETCHED_CITY_INFO"}
     ];
 
-    store.dispatch(getLocationInfo(-1.2177265,36.8829831)).then(() => {
+    store.dispatch(getLocationInfo(-1.2177265, 36.8829831)).then(() => {
        const actualActions = store.getActions();
 
        expect(expectedActions[0].type).toEqual(actualActions[0].type);
@@ -78,10 +78,36 @@ describe('Weather actions', () => {
       { type: "FAILED_FETCHING_CITY_INFO" }
     ];
 
-    store.dispatch(getLocationInfo(0,0)).then(() => {
+    store.dispatch(getLocationInfo(0, 0)).then(() => {
       const actualActions = store.getActions();
 
       expect(expectedActions[0].type).toEqual(actualActions[1].type);
+      done();
+    });
+  });
+
+  it('should create FETCHED_CURRENT_WEATHER_INFO', (done) => {
+
+    let middlewares = [thunk];
+    let mockStore = configureMockStore(middlewares);
+    let store = mockStore({});
+
+    const resolveWeatherSuccess = new Promise(
+      (resolve, reject) => resolve({
+        data: {
+          weather: [{id: 803, main: "Clouds", description: "broken clouds", icon: "04d"}]
+        }
+      }));
+
+    sandbox.stub(axios, 'get').returns(resolveWeatherSuccess);
+
+    const expectedActions = [
+      { type: "FETCHED_CURRENT_WEATHER_INFO" }
+    ];
+
+    store.dispatch(getCurrentWeather('Nairobi')).then(() => {
+      const actualActions = store.getActions();
+      expect(expectedActions[0].type).toEqual(actualActions[0].type);
       done();
     });
   });
