@@ -31,7 +31,7 @@ export const getLocationInfo = (lat, lng) => {
  */
 export const getCurrentWeather = (cityName) => {
   return ((dispatch) => {
-    return axios.get(process.env.API_WEATHER_URL + `/weather?q=${cityName}&appid=${process.env.WEATHER_API_KEY}`)
+    return axios.get(process.env.API_WEATHER_URL+`/weather?q=${cityName}&appid=${process.env.WEATHER_API_KEY}`)
       .then((response) => {
         dispatch({ type: "FETCHED_CURRENT_WEATHER_INFO", payload: response });
       }).catch((error) => {
@@ -48,7 +48,7 @@ export const getCurrentWeather = (cityName) => {
  */
 export const getFiveWeatherForecast = (cityName) => {
   return ((dispatch) => {
-    return axios.get(process.env.API_WEATHER_URL + `/forecast?q=${cityName}&appid=${process.env.WEATHER_API_KEY}`)
+    return axios.get(process.env.API_WEATHER_URL+`/forecast?q=${cityName}&appid=${process.env.WEATHER_API_KEY}`)
       .then((response) => {
         dispatch({type: "FETCHED_WEATHER_FORECAST_INFO", payload: response});
       }).catch((error) => {
