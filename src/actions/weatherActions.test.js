@@ -5,8 +5,12 @@ import expect from 'expect';
 import axios from 'axios';
 import sinon from 'sinon';
 
-// actions
-import { getLocationInfo, getCurrentWeather, getFiveWeatherForecast } from "./weatherActions";
+// action
+import {
+  getLocationInfo,
+  getCurrentWeather,
+  getFiveWeatherForecast
+} from "./weatherActions";
 
 let sandbox;
 let server;

@@ -78,14 +78,17 @@ render(){
     return(
       <div>
         <div className="jumbotron">
-          <h2 className="text-center">3 hour Weather Forecast {this.props.city}</h2>
+          <h2 className="text-center">Weather Forecast {this.props.city}</h2>
           <div className="text-center">
             {showCurrentWeather(this.props.current_weather.data)}
           </div>
         </div>
         <div className="container" style={{ width: '100%'}}>
+          <div className="jumbotron">
+            <h2 className="text-center">3 Hour Weather Forecast { this.props.city }</h2>
+          </div>
           <div className="row">
-                {showThreeHourForecast(this.props.forecast.list)}
+            {showThreeHourForecast(this.props.forecast.list)}
           </div>
           <div className="row">
             <div className="jumbotron">
