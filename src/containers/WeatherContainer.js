@@ -1,9 +1,9 @@
 import React from "react";
-import {connect} from 'react-redux';
-import {bindActionCreators} from "redux";
+import { connect } from 'react-redux';
+import { bindActionCreators } from "redux";
 
 import Weather from "../components/Weather";
-import { get_weather_info } from "../actions/weatherActions";
+import { getLocationInfo, getCurrentWeather, getFiveWeatherForecast } from "../actions/weatherActions";
 
 class WeatherContainer extends React.Component {
 
@@ -15,16 +15,24 @@ class WeatherContainer extends React.Component {
   }
 
   componentWillMount() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        let lat = position.coords.latitude;
+        let lng = position.coords.longitude;
 
-    this.props.get_weather_info();
+        this.props.getLocationInfo(lat, lng);
+      });
+    } else {
+      alert("Geo location NOT Supported");
+    }
   }
 
   render(){
     return (
-          <Weather loading={this.state.loading}
-                   weather_details={this.props.weather_details}
-                   styles={this.props.styles}
-
+          <Weather
+            loading={this.state.loading}
+            weather_details={this.props.weather_details}
+            styles={this.props.styles}
           />
     );
   }
@@ -34,16 +42,14 @@ class WeatherContainer extends React.Component {
 function mapStateToProps(state) {
   return {
     weather_details: state.weather
-
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
-      get_weather_info: get_weather_info
+      getLocationInfo: getLocationInfo, getCurrentWeather: getCurrentWeather, getFiveWeatherForecast: getFiveWeatherForecast
     }, dispatch);
-
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(WeatherContainer);
