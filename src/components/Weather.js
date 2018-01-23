@@ -13,19 +13,18 @@ class Weather extends React.Component {
    *
    * @return {XML}
    */
-  show_weather_info(){
-
-    if (this.props.weather_details.fetched_city !=="" &&
-        this.props.weather_details.current_weather !== null &&
-        this.props.weather_details.forecast_data !== null) {
-        return (
-          <WeatherForecast city={this.props.weather_details.fetched_city}
-                           current_weather={this.props.weather_details.current_weather}
-                           forecast={this.props.weather_details.forecast_data.data} />
-        );
+  showWeatherInfo(){
+    if (this.props.weather_details.current_weather !== null && this.props.weather_details.forecast_data !== null) {
+      return (
+        <WeatherForecast
+          city={this.props.weather_details.fetched_city}
+          current_weather={this.props.weather_details.current_weather}
+          forecast={this.props.weather_details.forecast_data.data}
+        />
+      );
     }
 
-   return (
+    return (
         <div>
          <div className={this.props.styles.loadbar}>
            <CircleLoader
@@ -34,32 +33,31 @@ class Weather extends React.Component {
              loading={this.props.loading}
            />
          </div>
-          <p className="text-center">Got Your Location</p>
+          <h2 className="text-center">Got Your Location</h2>
         </div>
-   );
-
+    );
   }
 
   /**
    * Render weather info if location is found. If not location render loader
    * @return {XML}
    */
-  show_location(){
-    if (this.props.weather_details.fetched_location === false) {
-      return (
-        <div className={this.props.styles.loadbar}>
-          <CircleLoader
-            color={'#363CD7'}
-            size={'120'}
-            loading={this.props.loading}
-          />
+  showLocation(){
+    if (this.props.weather_details.fetched_city !=="") {
+      return(
+        <div className={this.props.styles.weatherinfo}>
+          {this.showWeatherInfo()}
         </div>
       );
     }
 
-    return(
-      <div className={this.props.styles.weatherinfo}>
-        {this.show_weather_info()}
+    return (
+      <div className={this.props.styles.loadbar}>
+        <CircleLoader
+          color={'#363CD7'}
+          size={'120'}
+          loading={this.props.loading}
+        />
       </div>
     );
   }
@@ -67,7 +65,7 @@ class Weather extends React.Component {
   render() {
     return (
       <div>
-          {this.show_location()}
+          {this.showLocation()}
       </div>
     );
   }
