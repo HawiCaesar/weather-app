@@ -1,9 +1,19 @@
+// React library
 import React from "react";
+
+// third party libraries
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 
+// component
 import Weather from "../components/Weather";
-import { getLocationInfo, getCurrentWeather, getFiveWeatherForecast } from "../actions/weatherActions";
+
+// actions
+import {
+  getLocationInfo,
+  getCurrentWeather,
+  getFiveWeatherForecast
+} from "../actions/weatherActions";
 
 class WeatherContainer extends React.Component {
 
@@ -29,14 +39,13 @@ class WeatherContainer extends React.Component {
 
   render(){
     return (
-          <Weather
-            loading={this.state.loading}
-            weather_details={this.props.weather_details}
-            styles={this.props.styles}
-          />
+      <Weather
+        loading={this.state.loading}
+        weather_details={this.props.weather_details}
+        styles={this.props.styles}
+      />
     );
   }
-
 }
 
 function mapStateToProps(state) {
@@ -48,7 +57,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
-      getLocationInfo: getLocationInfo, getCurrentWeather: getCurrentWeather, getFiveWeatherForecast: getFiveWeatherForecast
+      getLocationInfo: getLocationInfo,
+      getCurrentWeather: getCurrentWeather,
+      getFiveWeatherForecast: getFiveWeatherForecast
     }, dispatch);
 }
 

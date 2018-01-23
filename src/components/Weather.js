@@ -13,7 +13,7 @@ class Weather extends React.Component {
    *
    * @return {XML}
    */
-  show_weather_info(){
+  showWeatherInfo(){
     if (this.props.weather_details.current_weather !== null && this.props.weather_details.forecast_data !== null) {
       return (
         <WeatherForecast
@@ -33,7 +33,7 @@ class Weather extends React.Component {
              loading={this.props.loading}
            />
          </div>
-          <p className="text-center">Got Your Location</p>
+          <h2 className="text-center">Got Your Location</h2>
         </div>
     );
   }
@@ -42,11 +42,11 @@ class Weather extends React.Component {
    * Render weather info if location is found. If not location render loader
    * @return {XML}
    */
-  show_location(){
+  showLocation(){
     if (this.props.weather_details.fetched_city !=="") {
       return(
         <div className={this.props.styles.weatherinfo}>
-          {this.show_weather_info()}
+          {this.showWeatherInfo()}
         </div>
       );
     }
@@ -65,7 +65,7 @@ class Weather extends React.Component {
   render() {
     return (
       <div>
-          {this.show_location()}
+          {this.showLocation()}
       </div>
     );
   }
