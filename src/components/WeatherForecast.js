@@ -41,15 +41,15 @@ render(){
     return forecasts.map(forecast => {
       // dates are equal
       if(convertDateToText(forecast.dt_txt)[0] === getCurrentDateTime()[0]) {
-          return (
-            <div key={forecast.dt} className="col-sm-3 text-center three-hour-forecast">
-              <p>Weather At {convertDateToText(forecast.dt_txt)[1]}</p>
-              <img src={process.env.WEATHER_ICON_URL + forecast.weather[0].icon + '.png'}/>
-              <p>HI {kelvinToCelsius(forecast.main.temp_max)}</p>
-              <p>LO {kelvinToCelsius(forecast.main.temp_min)}</p>
-            </div>
-          );
-        }
+        return (
+          <div key={forecast.dt} className="col-sm-3 text-center three-hour-forecast">
+            <p>Weather At {convertDateToText(forecast.dt_txt)[1]}</p>
+            <img src={process.env.WEATHER_ICON_URL + forecast.weather[0].icon + '.png'}/>
+            <p>HI {kelvinToCelsius(forecast.main.temp_max)}</p>
+            <p>LO {kelvinToCelsius(forecast.main.temp_min)}</p>
+          </div>
+        );
+      }
     });
   };
 
@@ -75,7 +75,7 @@ render(){
     });
   };
 
-    return(
+  return(
       <div>
         <div className="jumbotron">
           <h2 className="text-center">Weather Forecast {this.props.city}</h2>
@@ -98,7 +98,7 @@ render(){
           </div>
         </div>
       </div>
-    );
+  );
   }
 }
 export default WeatherForecast;

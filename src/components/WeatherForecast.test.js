@@ -29,6 +29,14 @@ describe('<WeatherForecast />', () => {
   );
 
   it('should render the current-weather section', () => {
-    expect(wrapper.find('.current-weather').length).toEqual(1);
+    expect(wrapper_two.find('.current-weather').length).toEqual(1);
+  });
+
+  it('should render 3 divs of the three-hour-forecast section', () => {
+    expect(wrapper_two.find('.three-hour-forecast').length).toEqual(3);
+  });
+
+  it('should render 3 divs of the five-day-forecast', () => {
+    expect(wrapper_two.find('.five-day-forecast').length).toEqual(3);
   });
 });

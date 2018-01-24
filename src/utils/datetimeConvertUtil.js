@@ -50,17 +50,17 @@ export const getCurrentDateTime = () => {
   let minute = date.getMinutes();
   let second = date.getSeconds();
 
-  if(month < 10){
+  if (month < 10) {
     month = '0'+month;
   }
 
-  if(date.getHours() < 10){
+  if (date.getHours() < 10) {
     hour = '0'+date.getHours();
   }
-  if(date.getMinutes() < 10){
+  if (date.getMinutes() < 10) {
     minute = '0'+date.getMinutes();
   }
-  if(date.getSeconds() < 10){
+  if (date.getSeconds() < 10) {
     second = '0'+date.getSeconds();
   }
 
