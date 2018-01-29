@@ -20,15 +20,18 @@ render(){
      * @return {XML}
      */
   const showCurrentWeather = (weather) => {
-    return (
-      <div className="current-weather">
-        <p className="text-center">{milisecondsToDateTime(this.props.current_weather.data.dt)[0]} Today</p>
-        <p className="text-center">Weather Now</p>
-        <img src={ process.env.WEATHER_ICON_URL+weather.weather[0].icon+'.png'} />
-        <p>HI { kelvinToCelsius(weather.main.temp_max) }</p>
-        <p>LO { kelvinToCelsius(weather.main.temp_min) }</p>
-      </div>
-    );
+    if (this.props.current_weather !== '') {
+      return (
+        <div className="current-weather">
+          <p className="text-center">{milisecondsToDateTime(this.props.current_weather.data.dt)[0]} Today</p>
+          <p className="text-center">Weather Now</p>
+          <img src={ process.env.WEATHER_ICON_URL+weather.weather[0].icon+'.png'} />
+          <p>HI { kelvinToCelsius(weather.main.temp_max) }</p>
+          <p>LO { kelvinToCelsius(weather.main.temp_min) }</p>
+        </div>
+      );
+    }
+    return (<div>No Current Weather Data</div>)
   };
 
   /**
@@ -37,7 +40,6 @@ render(){
    * @param forecasts
    */
   const showThreeHourForecast = (forecasts) => {
-
     return forecasts.map(forecast => {
       // dates are equal
       if(convertDateToText(forecast.dt_txt)[0] === getCurrentDateTime()[0]) {

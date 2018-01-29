@@ -51,9 +51,9 @@ export const getFiveWeatherForecast = (cityName) => {
   return ((dispatch) => {
     return axios.get(process.env.API_WEATHER_URL+`/forecast?q=${cityName}&appid=${process.env.WEATHER_API_KEY}`)
       .then((response) => {
-        dispatch({type: "FETCHED_WEATHER_FORECAST_INFO", payload: response});
+        dispatch({ type: "FETCHED_WEATHER_FORECAST_INFO", payload: response });
       }).catch((error) => {
-        dispatch({type: "FAILED_FETCHING_WEATHER_FORECAST_INFO", payload: error});
+        dispatch({ type: "FAILED_FETCHING_WEATHER_FORECAST_INFO", payload: error });
       });
   });
 };

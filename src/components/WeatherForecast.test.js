@@ -28,6 +28,10 @@ describe('<WeatherForecast />', () => {
     <WeatherForecast {...weatherProps} />
   );
 
+  it('should render the .container section', () => {
+    expect(wrapper.find('.container').length).toEqual(1);
+  });
+
   it('should render the current-weather section', () => {
     expect(wrapper_two.find('.current-weather').length).toEqual(1);
   });
@@ -38,5 +42,10 @@ describe('<WeatherForecast />', () => {
 
   it('should render 3 divs of the five-day-forecast', () => {
     expect(wrapper_two.find('.five-day-forecast').length).toEqual(3);
+  });
+
+  it('should not render the current weather component when no weather props given', () => {
+    wrapper_two.setProps({ current_weather: '' });
+    expect(wrapper_two.find('.current-weather').length).toEqual(0);
   });
 });
