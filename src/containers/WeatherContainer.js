@@ -10,9 +10,7 @@ import Weather from "../components/Weather";
 
 // actions
 import {
-  getLocationInfo,
-  getCurrentWeather,
-  getFiveWeatherForecast
+  getCoordinates
 } from "../actions/weatherActions";
 
 class WeatherContainer extends React.Component {
@@ -25,16 +23,7 @@ class WeatherContainer extends React.Component {
   }
 
   componentWillMount() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        let lat = position.coords.latitude;
-        let lng = position.coords.longitude;
-
-        this.props.getLocationInfo(lat, lng);
-      });
-    } else {
-      alert("Geo location NOT Supported");
-    }
+    this.props.getCoordinates();
   }
 
   render(){
@@ -57,9 +46,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
-      getLocationInfo: getLocationInfo,
-      getCurrentWeather: getCurrentWeather,
-      getFiveWeatherForecast: getFiveWeatherForecast
+      getCoordinates: getCoordinates
     }, dispatch);
 }
 
