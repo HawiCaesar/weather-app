@@ -1,11 +1,11 @@
 // react library
-import React from "react";
+import React from 'react';
 
-// third party library
+// third-party library
 import { CircleLoader } from 'react-spinners';
 
 // component
-import WeatherForecast from "./WeatherForecast";
+import WeatherForecast from './WeatherForecast';
 
 class Weather extends React.Component {
   /**
@@ -14,12 +14,12 @@ class Weather extends React.Component {
    * @return {XML}
    */
   showWeatherInfo(){
-    if (this.props.weather_details.current_weather !== null && this.props.weather_details.forecast_data !== null) {
+    if (this.props.weatherDetails.currentWeather !== null && this.props.weatherDetails.forecastData !== null) {
       return (
         <WeatherForecast
-          city={this.props.weather_details.fetched_city}
-          current_weather={this.props.weather_details.current_weather}
-          forecast={this.props.weather_details.forecast_data.data}
+          city={this.props.weatherDetails.fetchedCity}
+          currentWeather={this.props.weatherDetails.currentWeather}
+          forecast={this.props.weatherDetails.forecastData.data}
         />
       );
     }
@@ -43,7 +43,7 @@ class Weather extends React.Component {
    * @return {XML}
    */
   showLocation(){
-    if (this.props.weather_details.fetched_city !=="") {
+    if (this.props.weatherDetails.fetchedCity !=="") {
       return(
         <div className={this.props.styles.weatherinfo}>
           {this.showWeatherInfo()}
@@ -52,7 +52,7 @@ class Weather extends React.Component {
     }
 
     return (
-      <div className={this.props.styles.loadbar}>
+      <div className={this.props.styles.loadbar} id="no-city">
         <CircleLoader
           color={'#363CD7'}
           size={'120'}

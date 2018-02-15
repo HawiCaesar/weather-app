@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { spy } from 'sinon';
 import { createMockStore } from 'redux-test-utils';
 
-// components
+// component
 import WeatherForecast from './WeatherForecast';
 
 // fixtures
@@ -24,7 +24,7 @@ describe('<WeatherForecast />', () => {
     </Provider>
   );
 
-  const wrapper_two = shallow(
+  const wrapperTwo = shallow(
     <WeatherForecast {...weatherProps} />
   );
 
@@ -33,19 +33,19 @@ describe('<WeatherForecast />', () => {
   });
 
   it('should render the current-weather section', () => {
-    expect(wrapper_two.find('.current-weather').length).toEqual(1);
+    expect(wrapperTwo.find('.current-weather').length).toEqual(1);
   });
 
   it('should render 3 divs of the three-hour-forecast section', () => {
-    expect(wrapper_two.find('.three-hour-forecast').length).toEqual(3);
+    expect(wrapperTwo.find('.three-hour-forecast').length).toEqual(3);
   });
 
   it('should render 3 divs of the five-day-forecast', () => {
-    expect(wrapper_two.find('.five-day-forecast').length).toEqual(3);
+    expect(wrapperTwo.find('.five-day-forecast').length).toEqual(3);
   });
 
   it('should not render the current weather component when no weather props given', () => {
-    wrapper_two.setProps({ current_weather: '' });
-    expect(wrapper_two.find('.current-weather').length).toEqual(0);
+    wrapperTwo.setProps({ currentWeather: '' });
+    expect(wrapperTwo.find('.current-weather').length).toEqual(0);
   });
 });

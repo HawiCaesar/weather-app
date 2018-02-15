@@ -1,5 +1,5 @@
 // react library
-import React from "react";
+import React from 'react';
 
 // helpers
 import {
@@ -20,10 +20,10 @@ render(){
      * @return {XML}
      */
   const showCurrentWeather = (weather) => {
-    if (this.props.current_weather !== '') {
+    if (this.props.currentWeather !== '') {
       return (
         <div className="current-weather">
-          <p className="text-center"> Today, {milisecondsToDateTime(this.props.current_weather.data.dt)[0]}</p>
+          <p className="text-center"> Today, {milisecondsToDateTime(this.props.currentWeather.data.dt)[0]}</p>
           <p className="text-center">Weather Now</p>
           <img src={ process.env.WEATHER_ICON_URL+weather.weather[0].icon+'.png'} />
           <p>HI { kelvinToCelsius(weather.main.temp_max) }</p>
@@ -82,7 +82,7 @@ render(){
         <div className="jumbotron">
           <h2 className="text-center">Weather Forecast {this.props.city}</h2>
           <div className="text-center">
-            {showCurrentWeather(this.props.current_weather.data)}
+            {showCurrentWeather(this.props.currentWeather.data)}
           </div>
         </div>
         <div className="container" style={{ width: '100%'}}>

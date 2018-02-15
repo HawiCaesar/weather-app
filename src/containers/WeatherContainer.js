@@ -1,7 +1,7 @@
 // React library
 import React from "react";
 
-// third party libraries
+// third-party libraries
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 
@@ -9,9 +9,7 @@ import { bindActionCreators } from "redux";
 import Weather from "../components/Weather";
 
 // actions
-import {
-  getCoordinates
-} from "../actions/weatherActions";
+import { getCoordinates } from "../actions/weatherActions";
 
 class WeatherContainer extends React.Component {
 
@@ -30,7 +28,7 @@ class WeatherContainer extends React.Component {
     return (
       <Weather
         loading={this.state.loading}
-        weather_details={this.props.weather_details}
+        weatherDetails={this.props.weatherDetails}
         styles={this.props.styles}
       />
     );
@@ -39,7 +37,7 @@ class WeatherContainer extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    weather_details: state.weather
+    weatherDetails: state.weather
   };
 }
 

@@ -49,7 +49,7 @@ export const getCurrentDateTime = () => {
   let hour = date.getHours();
   let minute = date.getMinutes();
   let second = date.getSeconds();
-  let numericalDay;
+  let numericalDay = date.getDate();
 
   if (month < 10) {
     month = '0'+month;
