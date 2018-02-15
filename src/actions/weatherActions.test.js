@@ -37,7 +37,7 @@ describe('Weather actions', () => {
     sandbox.restore();
   });
 
-  it('should dispatch FETCHED_CITY_INFO when getLocationInfo completes successfully', (done) => {
+  it('should dispatch FETCHED_LOCATION_INFO when getLocationInfo completes successfully', (done) => {
 
     let middlewares = [thunk];
     let mockStore = configureMockStore(middlewares);
