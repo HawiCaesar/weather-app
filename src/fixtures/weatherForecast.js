@@ -1,7 +1,7 @@
 // helpers
 import {
   getCurrentDateTime
-} from "../utils/datetimeConvertUtil";
+} from '../utils/datetimeConvertUtil';
 
 const date = new Date();
 
@@ -33,7 +33,7 @@ export const weatherProps = {
       dt_txt: getCurrentDateTime(),
       id: 184745,
       weather: [
-        {id: 801, main: "Clouds", description: "few clouds", icon: "02d"}
+        {id: 801, main: 'Clouds', description: 'few clouds', icon: '02d'}
       ],
       main: {
         temp_max: 297.29,
@@ -47,7 +47,7 @@ export const weatherProps = {
         dt: 1516622400,
         dt_txt: getCurrentDateTime()[0]+' '+threeHoursLater(3),
         weather: [
-          {id: 800, main: "Clear", description: "clear sky", icon: "01d"}
+          {id: 800, main: 'Clear', description: 'clear sky', icon: '01d'}
         ],
         main: {
           temp_max: 297.29,
@@ -58,7 +58,7 @@ export const weatherProps = {
         dt: 1516622401,
         dt_txt: getCurrentDateTime()[0]+' '+threeHoursLater(6),
         weather: [
-          {id: 500, main: "Rain", description: "light rain", icon: "10d"}
+          {id: 500, main: 'Rain', description: 'light rain', icon: '10d'}
         ],
         main: {
           temp_max: 297.29,
@@ -69,7 +69,7 @@ export const weatherProps = {
         dt: 1516622402,
         dt_txt: getCurrentDateTime()[0]+' '+threeHoursLater(9),
         weather: [
-          {id: 500, main: "Rain", description: "light rain", icon: "10d"}
+          {id: 500, main: 'Rain', description: 'light rain', icon: '10d'}
         ],
         main: {
           temp_max: 297.29,
@@ -80,7 +80,7 @@ export const weatherProps = {
         dt: 1516622403,
         dt_txt: someDaysLater(1)+' 12:00:00',
         weather: [
-          {id: 500, main: "Rain", description: "light rain", icon: "10d"}
+          {id: 500, main: 'Rain', description: 'light rain', icon: '10d'}
         ],
         main: {
           temp_max: 297.29,
@@ -91,7 +91,7 @@ export const weatherProps = {
         dt: 1516622404,
         dt_txt: someDaysLater(2)+' 12:00:00',
         weather: [
-          {id: 500, main: "Rain", description: "light rain", icon: "10d"}
+          {id: 500, main: 'Rain', description: 'light rain', icon: '10d'}
         ],
         main: {
           temp_max: 297.29,
@@ -102,7 +102,7 @@ export const weatherProps = {
         dt: 1516622405,
         dt_txt: someDaysLater(3)+' 12:00:00',
         weather: [
-          {id: 500, main: "Rain", description: "light rain", icon: "10d"}
+          {id: 500, main: 'Rain', description: 'light rain', icon: '10d'}
         ],
         main: {
           temp_max: 297.29,

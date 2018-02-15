@@ -11,7 +11,7 @@ export const getCoordinates = () => {
         dispatch(getLocationInfo(lat, lng));
       });
     } else {
-      alert("Geo location NOT Supported");
+      alert('Geo location NOT Supported by this device');
     }
   });
 };
@@ -29,10 +29,10 @@ export const getLocationInfo = (lat, lng) => {
       .then((response) => {
         dispatch({ type: "FETCHED_LOCATION_INFO", payload: response.data.results });
 
-        dispatch(getCurrentWeather(response.data.results[0]['formatted_address'].split(", ")[1]));
-        dispatch(getFiveDayWeatherForecast(response.data.results[0]['formatted_address'].split(", ")[1]));
+        dispatch(getCurrentWeather(response.data.results[0]['formatted_address'].split(', ')[1]));
+        dispatch(getFiveDayWeatherForecast(response.data.results[0]['formatted_address'].split(', ')[1]));
       }).catch((error) => {
-        dispatch({ type: "FAILED_FETCHING_LOCATION_INFO", payload: error });
+        dispatch({ type: 'FAILED_FETCHING_LOCATION_INFO', payload: error });
       });
   });
 };
@@ -47,9 +47,9 @@ export const getCurrentWeather = (cityName) => {
   return ((dispatch) => {
     return axios.get(process.env.API_WEATHER_URL+`/weather?q=${cityName}&appid=${process.env.WEATHER_API_KEY}`)
       .then((response) => {
-        dispatch({ type: "FETCHED_CURRENT_WEATHER_INFO", payload: response });
+        dispatch({ type: 'FETCHED_CURRENT_WEATHER_INFO', payload: response });
       }).catch((error) => {
-        dispatch({ type: "FAILED_FETCHING_WEATHER_INFO", payload: error });
+        dispatch({ type: 'FAILED_FETCHING_WEATHER_INFO', payload: error });
     });
   });
 };
@@ -64,9 +64,9 @@ export const getFiveDayWeatherForecast = (cityName) => {
   return ((dispatch) => {
     return axios.get(process.env.API_WEATHER_URL+`/forecast?q=${cityName}&appid=${process.env.WEATHER_API_KEY}`)
       .then((response) => {
-        dispatch({ type: "FETCHED_WEATHER_FORECAST_INFO", payload: response });
+        dispatch({ type: 'FETCHED_WEATHER_FORECAST_INFO', payload: response });
       }).catch((error) => {
-        dispatch({ type: "FAILED_FETCHING_WEATHER_FORECAST_INFO", payload: error });
+        dispatch({ type: 'FAILED_FETCHING_WEATHER_FORECAST_INFO', payload: error });
       });
   });
 };

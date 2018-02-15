@@ -10,7 +10,7 @@ import { createMockStore } from 'redux-test-utils';
 import WeatherForecast from './WeatherForecast';
 
 // fixtures
-import { weatherProps } from "../fixtures/weatherForecast";
+import { weatherProps } from '../fixtures/weatherForecast';
 import { mockStore } from '../fixtures/store';
 
 // store

@@ -18,21 +18,21 @@ describe('weatherReducer tests', () => {
 
   it('should handle FETCHED_LOCATION_INFO action creator', () => {
     let action = {
-      type: "FETCHED_LOCATION_INFO",
+      type: 'FETCHED_LOCATION_INFO',
       payload: [
         {
-          formatted_address: "Mirema Rd, Nairobi, Kenya"
+          formatted_address: 'Mirema Rd, Nairobi, Kenya'
         }
       ]
     };
 
-    let expected = {...mockStore, fetchedCity: "Nairobi", fetchedLocation: true};
+    let expected = {...mockStore, fetchedCity: 'Nairobi', fetchedLocation: true};
     expect(weatherReducer(mockStore, action)).toEqual(expected);
   });
 
   it('should handle FAILED_FETCHING_LOCATION_INFO action creator', () => {
     let action = {
-      type: "FAILED_FETCHING_LOCATION_INFO",
+      type: 'FAILED_FETCHING_LOCATION_INFO',
       payload: {
         data: {
           error_message: 'Invalid request. Invalid latlng parameter.'
@@ -46,7 +46,7 @@ describe('weatherReducer tests', () => {
 
   it('should handle FETCHED_WEATHER_FORECAST_INFO action creator', () => {
     let action = {
-      type: "FETCHED_WEATHER_FORECAST_INFO",
+      type: 'FETCHED_WEATHER_FORECAST_INFO',
       payload: weatherProps.forecast
     };
 
@@ -56,7 +56,7 @@ describe('weatherReducer tests', () => {
 
   it('should handle FETCHED_CURRENT_WEATHER_INFO action creator', () => {
     let action = {
-      type: "FETCHED_CURRENT_WEATHER_INFO",
+      type: 'FETCHED_CURRENT_WEATHER_INFO',
       payload: weatherProps.currentWeather
     };
 
@@ -66,7 +66,7 @@ describe('weatherReducer tests', () => {
 
   it('should handle FAILED_FETCHING_WEATHER_INFO action creator', () => {
     let action = {
-      type: "FAILED_FETCHING_WEATHER_INFO",
+      type: 'FAILED_FETCHING_WEATHER_INFO',
       payload: {
         data: {
           message: 'city not found'
@@ -80,7 +80,7 @@ describe('weatherReducer tests', () => {
 
   it('should handle FAILED_FETCHING_WEATHER_FORECAST_INFO', () => {
     let action = {
-      type: "FAILED_FETCHING_WEATHER_FORECAST_INFO",
+      type: 'FAILED_FETCHING_WEATHER_FORECAST_INFO',
       payload: {
         data: {
           message: 'city not found'

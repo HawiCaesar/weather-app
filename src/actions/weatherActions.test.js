@@ -10,7 +10,7 @@ import {
   getLocationInfo,
   getCurrentWeather,
   getFiveDayWeatherForecast
-} from "./weatherActions";
+} from './weatherActions';
 
 let sandbox;
 let server;
@@ -18,12 +18,12 @@ let server;
 describe('Weather actions', () => {
 
   const expectedActions = [
-    { type: "FETCHED_LOCATION_INFO"},
-    { type: "FAILED_FETCHING_LOCATION_INFO" },
-    { type: "FETCHED_CURRENT_WEATHER_INFO" },
-    { type: "FAILED_FETCHING_WEATHER_INFO" },
-    { type: "FETCHED_WEATHER_FORECAST_INFO" },
-    { type: "FAILED_FETCHING_WEATHER_FORECAST_INFO" }
+    { type: 'FETCHED_LOCATION_INFO'},
+    { type: 'FAILED_FETCHING_LOCATION_INFO' },
+    { type: 'FETCHED_CURRENT_WEATHER_INFO' },
+    { type: 'FAILED_FETCHING_WEATHER_INFO' },
+    { type: 'FETCHED_WEATHER_FORECAST_INFO' },
+    { type: 'FAILED_FETCHING_WEATHER_FORECAST_INFO' }
   ];
 
   beforeEach(() => {
@@ -48,7 +48,7 @@ describe('Weather actions', () => {
         data: {
           results: [
             {
-              formatted_address: "Mirema Rd, Nairobi, Kenya"
+              formatted_address: 'Mirema Rd, Nairobi, Kenya'
             }
           ]
         }
@@ -98,7 +98,7 @@ describe('Weather actions', () => {
     const resolveWeatherSuccess = new Promise(
       (resolve, reject) => resolve({
         data: {
-          weather: [{id: 803, main: "Clouds", description: "broken clouds", icon: "04d"}]
+          weather: [{id: 803, main: 'Clouds', description: 'broken clouds', icon: '04d'}]
         }
       }));
 
@@ -160,8 +160,8 @@ describe('Weather actions', () => {
     const resolveForecastSuccess = new Promise(
       (resolve, reject) => reject({
         data: {
-          cod:"404",
-          message:"city not found"
+          cod:'404',
+          message:'city not found'
         }
       }));
 

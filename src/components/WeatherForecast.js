@@ -6,8 +6,8 @@ import {
   convertDateToText,
   milisecondsToDateTime,
   getCurrentDateTime
-} from "../utils/datetimeConvertUtil";
-import kelvinToCelsius  from "../utils/kelvinToCelsius";
+} from '../utils/datetimeConvertUtil';
+import kelvinToCelsius  from '../utils/kelvinToCelsius';
 
 class WeatherForecast extends React.Component {
 

@@ -1,6 +1,6 @@
 export const mockStore = {
   fetchedLocation: false,
-  fetchedCity: "",
+  fetchedCity: '',
   locationError: null,
   forecastWeather: false,
   fetchingError: null,

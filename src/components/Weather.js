@@ -43,7 +43,7 @@ class Weather extends React.Component {
    * @return {XML}
    */
   showLocation(){
-    if (this.props.weatherDetails.fetchedCity !=="") {
+    if (this.props.weatherDetails.fetchedCity !=='') {
       return(
         <div className={this.props.styles.weatherinfo}>
           {this.showWeatherInfo()}
