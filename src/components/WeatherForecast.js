@@ -3,7 +3,7 @@ import React from 'react';
 
 // helpers
 import {
-  convertDateToText,
+  dateTimeExtraction,
   milisecondsToDateTime,
   getCurrentDateTime
 } from '../utils/datetimeConvertUtil';
@@ -42,10 +42,10 @@ render(){
   const showThreeHourForecast = (forecasts) => {
     return forecasts.map(forecast => {
       // dates are equal
-      if(convertDateToText(forecast.dt_txt)[0] === getCurrentDateTime()[0]) {
+      if(dateTimeExtraction(forecast.dt_txt)[0] === getCurrentDateTime()[0]) {
         return (
           <div key={forecast.dt} className="col-sm-3 text-center three-hour-forecast">
-            <p>Weather At {convertDateToText(forecast.dt_txt)[1]}</p>
+            <p>Weather At {dateTimeExtraction(forecast.dt_txt)[1]}</p>
             <img src={process.env.WEATHER_ICON_URL + forecast.weather[0].icon + '.png'}/>
             <p>HI {kelvinToCelsius(forecast.main.temp_max)}</p>
             <p>LO {kelvinToCelsius(forecast.main.temp_min)}</p>
@@ -62,8 +62,8 @@ render(){
      */
   const showFiveDayForecast = (forecasts) => {
     return forecasts.map(forecast => {
-      if(convertDateToText(forecast.dt_txt)[0] !== getCurrentDateTime()[0]){
-          if(convertDateToText(forecast.dt_txt)[1] === '12:00:00'){
+      if(dateTimeExtraction(forecast.dt_txt)[0] !== getCurrentDateTime()[0]) {
+          if(dateTimeExtraction(forecast.dt_txt)[1] === '12:00:00'){
             return(
               <div key={forecast.dt} className="col-sm-3 text-center five-day-forecast">
                 <p><b>{milisecondsToDateTime(forecast.dt)[0]}</b></p>

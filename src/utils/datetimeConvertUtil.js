@@ -5,7 +5,7 @@ const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", 
  * @param unixTimeStamp
  * @return {Array}
  */
-export const convertDateToText = (unixTimeStamp) => {
+export const dateTimeExtraction = (unixTimeStamp) => {
   return unixTimeStamp.split(" ");
 };
 
