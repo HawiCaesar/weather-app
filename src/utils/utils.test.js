@@ -19,7 +19,7 @@ describe('Utility logic tests', () => {
   });
 
   it('should extract the day from miliseconds to date', () => {
-    let apiMiliseconds = 1519711200;
+    let apiMiliseconds = 1519722000;
     let expected = ['Tuesday', '09:00:00'];
 
     expect(milisecondsToDateTime(apiMiliseconds)[0]).toEqual(expected[0]);

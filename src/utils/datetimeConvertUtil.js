@@ -16,25 +16,23 @@ export const dateTimeExtraction = (unixTimeStamp) => {
  * @return {[days,time]}
  */
 export const milisecondsToDateTime = (unixTimeStamp) => {
-  let date = new Date(0);
-  date.setUTCSeconds(unixTimeStamp);
+  let date = new Date(unixTimeStamp * 1000);
 
-  let hour = date.getHours();
-  let minute = date.getMinutes();
-  let second = date.getSeconds();
+  let hour = date.getUTCHours();
+  let minute = date.getUTCMinutes();
+  let second = date.getUTCSeconds();
 
-  if (date.getHours() < 10) {
-    hour = '0'+date.getHours();
+  if (date.getUTCHours() < 10) {
+    hour = '0'+date.getUTCHours();
   }
-  if (date.getMinutes() < 10) {
-    minute = '0'+date.getMinutes();
+  if (date.getUTCMinutes() < 10) {
+    minute = '0'+date.getUTCMinutes();
   }
-  if (date.getSeconds() < 10) {
-    second = '0'+date.getSeconds();
+  if (date.getUTCSeconds() < 10) {
+    second = '0'+date.getUTCSeconds();
   }
 
   let time = hour+":"+minute+":"+second;
-
   return [days[date.getDay()], time];
 };
 
