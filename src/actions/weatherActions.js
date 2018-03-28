@@ -1,9 +1,5 @@
 // third-party library
 import axios from 'axios';
-//import { checkCacheValid } from 'redux-cache';
-import { weatherDetails } from "../fixtures/weather";
-
-//import { store } from '../store';
 
 /**
  * getCoordinates - fetches the coordinates of the current location
@@ -12,7 +8,6 @@ import { weatherDetails } from "../fixtures/weather";
  */
 export const getCoordinates = () => {
   return ((dispatch) => {
-    //const isCacheValid = checkCacheValid(getState, "weather");
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
           let lat = position.coords.latitude;

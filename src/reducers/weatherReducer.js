@@ -1,6 +1,3 @@
-// third-party library
-//import { DEFAULT_KEY, generateCacheTTL } from "redux-cache";
-
 // initial state
 import initialState from './initialState';
 
