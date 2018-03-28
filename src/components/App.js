@@ -9,7 +9,7 @@ const App = () => (
         <a className="navbar-brand" href="#">Weather App</a>
       </div>
     </nav>
-    <WeatherContainer styles={styles}/>
+    <WeatherContainer styles={styles} />
   </div>
 );
 

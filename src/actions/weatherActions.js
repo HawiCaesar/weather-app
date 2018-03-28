@@ -1,18 +1,29 @@
 // third-party library
 import axios from 'axios';
+//import { checkCacheValid } from 'redux-cache';
+import { weatherDetails } from "../fixtures/weather";
 
+//import { store } from '../store';
+
+/**
+ * getCoordinates - fetches the coordinates of the current location
+ *
+ * @return {type} Description
+ */
 export const getCoordinates = () => {
   return ((dispatch) => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        let lat = position.coords.latitude;
-        let lng = position.coords.longitude;
+    //const isCacheValid = checkCacheValid(getState, "weather");
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          let lat = position.coords.latitude;
+          let lng = position.coords.longitude;
 
-        dispatch(getLocationInfo(lat, lng));
-      });
-    } else {
-      alert('Geo location NOT Supported by this device');
-    }
+          dispatch(getLocationInfo(lat, lng));
+        });
+      } else {
+        alert('Geo location NOT Supported by this device');
+      }
+
   });
 };
 

@@ -1,14 +1,10 @@
-export default function (state = {
-  fetchedLocation: false,
-  fetchedCity: '',
-  locationError: null,
-  forecastWeather: false,
-  fetchingError: null,
-  forecastError: null,
-  forecastData: null,
-  currentWeather: null,
-  currentWeatherError: null
-}, action) {
+// third-party library
+//import { DEFAULT_KEY, generateCacheTTL } from "redux-cache";
+
+// initial state
+import initialState from './initialState';
+
+export default function (state = {...initialState}, action) {
 
   switch (action.type) {
     case 'FETCHED_LOCATION_INFO': {
