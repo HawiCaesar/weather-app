@@ -5,7 +5,7 @@ const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", 
  * @param unixTimeStamp
  * @return {Array}
  */
-export const convertDateToText = (unixTimeStamp) => {
+export const dateTimeExtraction = (unixTimeStamp) => {
   return unixTimeStamp.split(" ");
 };
 
@@ -16,25 +16,23 @@ export const convertDateToText = (unixTimeStamp) => {
  * @return {[days,time]}
  */
 export const milisecondsToDateTime = (unixTimeStamp) => {
-  let date = new Date(0);
-  date.setUTCSeconds(unixTimeStamp);
+  let date = new Date(unixTimeStamp * 1000);
 
-  let hour = date.getHours();
-  let minute = date.getMinutes();
-  let second = date.getSeconds();
+  let hour = date.getUTCHours();
+  let minute = date.getUTCMinutes();
+  let second = date.getUTCSeconds();
 
-  if(date.getHours() < 10){
-    hour = '0'+date.getHours();
+  if (date.getUTCHours() < 10) {
+    hour = '0'+date.getUTCHours();
   }
-  if(date.getMinutes() < 10){
-    minute = '0'+date.getMinutes();
+  if (date.getUTCMinutes() < 10) {
+    minute = '0'+date.getUTCMinutes();
   }
-  if(date.getSeconds() < 10){
-    second = '0'+date.getSeconds();
+  if (date.getUTCSeconds() < 10) {
+    second = '0'+date.getUTCSeconds();
   }
 
   let time = hour+":"+minute+":"+second;
-
   return [days[date.getDay()], time];
 };
 
@@ -49,22 +47,27 @@ export const getCurrentDateTime = () => {
   let hour = date.getHours();
   let minute = date.getMinutes();
   let second = date.getSeconds();
+  let numericalDay = date.getDate();
 
-  if(month < 10){
+  if (month < 10) {
     month = '0'+month;
   }
 
-  if(date.getHours() < 10){
+  if (date.getDate() < 10) {
+    numericalDay = '0'+date.getDate();
+  }
+
+  if (date.getHours() < 10) {
     hour = '0'+date.getHours();
   }
-  if(date.getMinutes() < 10){
+  if (date.getMinutes() < 10) {
     minute = '0'+date.getMinutes();
   }
-  if(date.getSeconds() < 10){
+  if (date.getSeconds() < 10) {
     second = '0'+date.getSeconds();
   }
 
   let time = hour+":"+minute+":"+second;
 
-  return [date.getFullYear()+'-'+month+'-'+date.getDate(), time];
+  return [date.getFullYear()+'-'+month+'-'+numericalDay, time];
 };

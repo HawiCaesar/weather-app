@@ -1,13 +1,13 @@
 // react library
-import React from "react";
+import React from 'react';
 
 // helpers
 import {
-  convertDateToText,
+  dateTimeExtraction,
   milisecondsToDateTime,
   getCurrentDateTime
-} from "../utils/datetimeConvertUtil";
-import kelvinToCelsius  from "../utils/kelvinToCelsius";
+} from '../utils/datetimeConvertUtil';
+import kelvinToCelsius  from '../utils/kelvinToCelsius';
 
 class WeatherForecast extends React.Component {
 
@@ -20,15 +20,18 @@ render(){
      * @return {XML}
      */
   const showCurrentWeather = (weather) => {
-    return (
-      <div className="current-weather">
-        <p className="text-center">{milisecondsToDateTime(this.props.current_weather.data.dt)[0]} Today</p>
-        <p className="text-center">Weather Now</p>
-        <img src={ process.env.WEATHER_ICON_URL+weather.weather[0].icon+'.png'} />
-        <p>HI { kelvinToCelsius(weather.main.temp_max) }</p>
-        <p>LO { kelvinToCelsius(weather.main.temp_min) }</p>
-      </div>
-    );
+    if (this.props.currentWeather !== '') {
+      return (
+        <div className="current-weather">
+          <p className="text-center"> Today, {milisecondsToDateTime(this.props.currentWeather.data.dt)[0]}</p>
+          <p className="text-center">Weather Now</p>
+          <img src={ process.env.WEATHER_ICON_URL+weather.weather[0].icon+'.png'} />
+          <p>HI { kelvinToCelsius(weather.main.temp_max) }</p>
+          <p>LO { kelvinToCelsius(weather.main.temp_min) }</p>
+        </div>
+      );
+    }
+    return (<div>No Current Weather Data</div>);
   };
 
   /**
@@ -37,19 +40,18 @@ render(){
    * @param forecasts
    */
   const showThreeHourForecast = (forecasts) => {
-
     return forecasts.map(forecast => {
       // dates are equal
-      if(convertDateToText(forecast.dt_txt)[0] === getCurrentDateTime()[0]) {
-          return (
-            <div key={forecast.dt} className="col-sm-3 text-center three-hour-forecast">
-              <p>Weather At {convertDateToText(forecast.dt_txt)[1]}</p>
-              <img src={process.env.WEATHER_ICON_URL + forecast.weather[0].icon + '.png'}/>
-              <p>HI {kelvinToCelsius(forecast.main.temp_max)}</p>
-              <p>LO {kelvinToCelsius(forecast.main.temp_min)}</p>
-            </div>
-          );
-        }
+      if(dateTimeExtraction(forecast.dt_txt)[0] === getCurrentDateTime()[0]) {
+        return (
+          <div key={forecast.dt} className="col-sm-3 text-center three-hour-forecast">
+            <p>Weather At {dateTimeExtraction(forecast.dt_txt)[1]}</p>
+            <img src={process.env.WEATHER_ICON_URL + forecast.weather[0].icon + '.png'}/>
+            <p>HI {kelvinToCelsius(forecast.main.temp_max)}</p>
+            <p>LO {kelvinToCelsius(forecast.main.temp_min)}</p>
+          </div>
+        );
+      }
     });
   };
 
@@ -60,8 +62,8 @@ render(){
      */
   const showFiveDayForecast = (forecasts) => {
     return forecasts.map(forecast => {
-      if(convertDateToText(forecast.dt_txt)[0] !== getCurrentDateTime()[0]){
-          if(convertDateToText(forecast.dt_txt)[1] === '12:00:00'){
+      if(dateTimeExtraction(forecast.dt_txt)[0] !== getCurrentDateTime()[0]) {
+          if(dateTimeExtraction(forecast.dt_txt)[1] === '12:00:00'){
             return(
               <div key={forecast.dt} className="col-sm-3 text-center five-day-forecast">
                 <p><b>{milisecondsToDateTime(forecast.dt)[0]}</b></p>
@@ -75,12 +77,12 @@ render(){
     });
   };
 
-    return(
+  return(
       <div>
         <div className="jumbotron">
           <h2 className="text-center">Weather Forecast {this.props.city}</h2>
           <div className="text-center">
-            {showCurrentWeather(this.props.current_weather.data)}
+            {showCurrentWeather(this.props.currentWeather.data)}
           </div>
         </div>
         <div className="container" style={{ width: '100%'}}>
@@ -98,7 +100,7 @@ render(){
           </div>
         </div>
       </div>
-    );
+  );
   }
 }
 export default WeatherForecast;
