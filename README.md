@@ -1,4 +1,6 @@
-# Weather App [![Build Status](https://travis-ci.org/HawiCaesar/weather-app.svg?branch=develop)](https://travis-ci.org/HawiCaesar/weather-app)
+# Weather App 
+[![Build Status](https://travis-ci.org/HawiCaesar/weather-app.svg?branch=develop)](https://travis-ci.org/HawiCaesar/weather-app)
+[![Maintainability](https://api.codeclimate.com/v1/badges/ef062d03c08bd56a0320/maintainability)](https://codeclimate.com/github/HawiCaesar/weather-app/maintainability)
 ## This is a simple React + Redux consuming [Open Weather Map API](https://openweathermap.org/api) weather API
 
 #### Features
