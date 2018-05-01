@@ -10,7 +10,8 @@
     "lint:watch": "npm run lint -- -- watch",
     "test": "mocha tools/testSetup.js \"src/**/*.test.js\"",
     "test:watch": "npm run test -- --watch",
-    "coverage": "./node_modules/istanbul/lib/cli.js cover _mocha tools/testSetup.js \"src/**/*.test.js\" | coveralls"
+    "coverage": "./node_modules/istanbul/lib/cli.js cover _mocha tools/testSetup.js \"src/**/*.test.js\"",
+    "report-coverage": "cat ./coverage/lcov.info | coveralls"
   },
   "author": "HawiCaesar",
   "license": "MIT",
