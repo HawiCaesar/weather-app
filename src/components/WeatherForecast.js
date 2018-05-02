@@ -13,6 +13,11 @@ class WeatherForecast extends React.Component {
 
 render(){
 
+  const temperatureSettings = () => {
+    console.log('**********Here we go');
+    alert('****');
+  };
+
     /**
      * Render current weather
      *
@@ -28,6 +33,7 @@ render(){
           <img src={ process.env.WEATHER_ICON_URL+weather.weather[0].icon+'.png'} />
           <p>HI { kelvinToCelsius(weather.main.temp_max) }</p>
           <p>LO { kelvinToCelsius(weather.main.temp_min) }</p>
+          <div><button onClick={temperatureSettings}>Settings</button></div>
         </div>
       );
     }
