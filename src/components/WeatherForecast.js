@@ -14,8 +14,7 @@ class WeatherForecast extends React.Component {
 render(){
 
   const temperatureSettings = () => {
-    console.log('**********Here we go');
-    alert('****');
+    this.props.convertToFarenheit(this.props.currentWeather, this.props.forecast);
   };
 
     /**
@@ -31,8 +30,8 @@ render(){
           <p className="text-center"> Today, {milisecondsToDateTime(this.props.currentWeather.data.dt)[0]}</p>
           <p className="text-center">Weather Now</p>
           <img src={ process.env.WEATHER_ICON_URL+weather.weather[0].icon+'.png'} />
-          <p>HI { kelvinToCelsius(weather.main.temp_max) }</p>
-          <p>LO { kelvinToCelsius(weather.main.temp_min) }</p>
+          <p>HI { weather.main.temp_max }</p>
+          <p>LO { weather.main.temp_min }</p>
           <div><button onClick={temperatureSettings}>Settings</button></div>
         </div>
       );
@@ -53,8 +52,8 @@ render(){
           <div key={forecast.dt} className="col-sm-3 text-center three-hour-forecast">
             <p>Weather At {dateTimeExtraction(forecast.dt_txt)[1]}</p>
             <img src={process.env.WEATHER_ICON_URL + forecast.weather[0].icon + '.png'}/>
-            <p>HI {kelvinToCelsius(forecast.main.temp_max)}</p>
-            <p>LO {kelvinToCelsius(forecast.main.temp_min)}</p>
+            <p>HI { forecast.main.temp_max }</p>
+            <p>LO { forecast.main.temp_min }</p>
           </div>
         );
       }
@@ -74,8 +73,8 @@ render(){
               <div key={forecast.dt} className="col-sm-3 text-center five-day-forecast">
                 <p><b>{milisecondsToDateTime(forecast.dt)[0]}</b></p>
                 <img src={ process.env.WEATHER_ICON_URL+forecast.weather[0].icon+'.png'} />
-                <p>HI {kelvinToCelsius(forecast.main.temp_max)}</p>
-                <p>LO {kelvinToCelsius(forecast.main.temp_min)}</p>
+                <p>HI { forecast.main.temp_max }</p>
+                <p>LO { forecast.main.temp_min }</p>
               </div>
             );
           }

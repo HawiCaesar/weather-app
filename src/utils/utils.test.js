@@ -7,6 +7,7 @@ import {
   milisecondsToDateTime
 } from './datetimeConvertUtil';
 import kelvinToCelsius  from '../utils/kelvinToCelsius';
+import { degreesToFarenheit } from '../utils/degreesToFarenheit';
 
 describe('Utility logic tests', () => {
 
@@ -31,5 +32,13 @@ describe('Utility logic tests', () => {
     let expected = 21.76;
 
     expect(kelvinToCelsius(apiKelvinTemperature), expected);
+  });
+
+  it('should convert temperature in degrees to temperature in farenheit', () => {
+    let apiKelvinTemperature = 296.29;
+    let tempInDegrees = kelvinToCelsius(apiKelvinTemperature);
+    let expected = 73.65;
+
+    expect(degreesToFarenheit(tempInDegrees)).toEqual(expected);
   });
 });

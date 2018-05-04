@@ -10,6 +10,9 @@ import { mockStore } from '../fixtures/store';
 // fixtures
 import { weatherProps } from '../fixtures/weatherForecast';
 
+// utils
+import { degreesToFarenheit } from '../utils/degreesToFarenheit';
+
 describe('weatherReducer tests', () => {
 
   it('should return the initial state', () => {
@@ -89,6 +92,38 @@ describe('weatherReducer tests', () => {
     };
 
     let expected = {...mockStore, forecastWeather: false, forecastError: 'city not found'};
+    expect(weatherReducer(mockStore, action)).toEqual(expected);
+  });
+
+  it('should handle CONVERT_DEGREES_TO_FARENHEIT', () => {
+    let convertedCurrentTemperature = {...weatherProps.currentWeather.data,
+      main: {
+        temp_max: 24.14,
+        temp_min: 23.14
+      }
+    };
+
+    let listForecastTemperature = weatherProps.forecast.list.map((testForecast) => {
+      testForecast.main.temp_max = degreesToFarenheit(testForecast.main.temp_max);
+      testForecast.main.temp_min = degreesToFarenheit(testForecast.main.temp_min);
+    });
+
+    let convertedForecastTemperature = { data: listForecastTemperature};
+
+
+    let action = {
+      type: 'CONVERT_DEGREES_TO_FARENHEIT',
+      payload: [
+        convertedCurrentTemperature,
+        convertedForecastTemperature
+      ]
+    };
+
+    let expected = {...mockStore,
+      currentWeather: convertedCurrentTemperature,
+      forecastData: convertedForecastTemperature
+    };
+
     expect(weatherReducer(mockStore, action)).toEqual(expected);
   });
 });

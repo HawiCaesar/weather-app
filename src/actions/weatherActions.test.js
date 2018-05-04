@@ -9,8 +9,12 @@ import sinon from 'sinon';
 import {
   getLocationInfo,
   getCurrentWeather,
-  getFiveDayWeatherForecast
+  getFiveDayWeatherForecast,
+  convertToFarenheit
 } from './weatherActions';
+
+// fixtures
+import { weatherProps } from '../fixtures/weatherForecast';
 
 let sandbox;
 let server;
@@ -23,7 +27,8 @@ describe('Weather actions', () => {
     { type: 'FETCHED_CURRENT_WEATHER_INFO' },
     { type: 'FAILED_FETCHING_WEATHER_INFO' },
     { type: 'FETCHED_WEATHER_FORECAST_INFO' },
-    { type: 'FAILED_FETCHING_WEATHER_FORECAST_INFO' }
+    { type: 'FAILED_FETCHING_WEATHER_FORECAST_INFO' },
+    { type: 'CONVERT_DEGREES_TO_FARENHEIT'}
   ];
 
   beforeEach(() => {
@@ -81,9 +86,6 @@ describe('Weather actions', () => {
 
     store.dispatch(getLocationInfo(0, 0)).then(() => {
       const actualActions = store.getActions();
-
-      //console.log(actualActions)
-
       expect(expectedActions[1].type).toEqual(actualActions[0].type);
       done();
     });
@@ -97,9 +99,7 @@ describe('Weather actions', () => {
 
     const resolveWeatherSuccess = new Promise(
       (resolve, reject) => resolve({
-        data: {
-          weather: [{id: 803, main: 'Clouds', description: 'broken clouds', icon: '04d'}]
-        }
+        data: weatherProps.currentWeather.data
       }));
 
     sandbox.stub(axios, 'get').returns(resolveWeatherSuccess);
@@ -139,7 +139,7 @@ describe('Weather actions', () => {
 
     const resolveForecastSuccess = new Promise(
       (resolve, reject) => resolve({
-        data: {}
+        data: weatherProps.forecast
       }));
 
     sandbox.stub(axios, 'get').returns(resolveForecastSuccess);
@@ -172,6 +172,16 @@ describe('Weather actions', () => {
       expect(expectedActions[5].type).toEqual(actualActions[0].type);
       done();
     });
+  });
+  it('should dispatch CONVERT_DEGREES_TO_FARENHEIT when convertToFarenheit completes successfully', () => {
+
+    let middlewares = [thunk];
+    let mockStore = configureMockStore(middlewares);
+    let store = mockStore({});
+
+    store.dispatch(convertToFarenheit(weatherProps.currentWeather, weatherProps.forecast));
+      const actualActions = store.getActions();
+      expect(expectedActions[6].type).toEqual(actualActions[0].type);
   });
 });
 

@@ -28,6 +28,8 @@ export default function (state = {
       return {...state, currentWeatherError: action.payload.data.message};
     case 'FAILED_FETCHING_WEATHER_FORECAST_INFO':
       return {...state, forecastWeather: false, forecastError: action.payload.data.message};
+    case 'CONVERT_DEGREES_TO_FARENHEIT':
+      return {...state, currentWeather: action.payload[0], forecastData: action.payload[1]};
   }
   return state;
 }

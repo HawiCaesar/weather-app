@@ -1,3 +1,3 @@
 export default function kelvinToCelsius(tempInKelvin){
-   return (tempInKelvin - 273.15).toFixed(2);
+   return parseFloat((tempInKelvin - 273.15).toFixed(2));
 }
