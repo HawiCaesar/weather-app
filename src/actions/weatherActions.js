@@ -82,6 +82,7 @@ export const getFiveDayWeatherForecast = (cityName) => {
 };
 
 /**
+ * Convert degrees to farenheit
  *
  * @param currentWeatherInDegrees
  * @param forecastWeatherInDegrees
