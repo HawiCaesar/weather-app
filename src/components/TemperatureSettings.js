@@ -29,22 +29,6 @@ class TemperatureSettings extends React.Component {
             Change to Degress Farhenheit
           </div>
         </div>
-        {/*<div className="form-check form-check-inline disabled">*/}
-          {/*<input*/}
-            {/*className="form-check-input"*/}
-            {/*type="radio"*/}
-            {/*name="exampleRadios"*/}
-            {/*id="exampleRadios3"*/}
-            {/*value="option3"*/}
-            {/*disabled*/}
-          {/*/>*/}
-            {/*<div*/}
-              {/*className="form-check-label"*/}
-              {/*for="exampleRadios3"*/}
-            {/*>*/}
-              {/*Disabled radio*/}
-            {/*</div>*/}
-        {/*</div>*/}
       </div>
     );
   }
