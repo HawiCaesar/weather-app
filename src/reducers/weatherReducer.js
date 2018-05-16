@@ -7,7 +7,8 @@ export default function (state = {
   forecastError: null,
   forecastData: null,
   currentWeather: null,
-  currentWeatherError: null
+  currentWeatherError: null,
+  temperatureScale: "celisus"
 }, action) {
 
   switch (action.type) {
@@ -29,7 +30,19 @@ export default function (state = {
     case 'FAILED_FETCHING_WEATHER_FORECAST_INFO':
       return {...state, forecastWeather: false, forecastError: action.payload.data.message};
     case 'CONVERT_DEGREES_TO_FARENHEIT':
-      return {...state, currentWeather: action.payload[0], forecastData: action.payload[1]};
+      return {
+        ...state,
+        currentWeather: action.payload[0],
+        forecastData: action.payload[1],
+        temperatureScale: "fahrenheit"
+      };
+    case 'CONVERT_FARENHEIT_TO_DEGREES':
+      return {
+        ...state,
+        currentWeather: action.payload[0],
+        forecastData: action.payload[1],
+        temperatureScale: "celsius"
+      };
   }
   return state;
 }

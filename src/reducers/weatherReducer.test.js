@@ -11,7 +11,7 @@ import { mockStore } from '../fixtures/store';
 import { weatherProps } from '../fixtures/weatherForecast';
 
 // utils
-import { degreesToFarenheit } from '../utils/degreesToFarenheit';
+import { celsiusToFarenheit, fahrenheitToCelsius } from '../utils/celsiusFarenheitConversion';
 
 describe('weatherReducer tests', () => {
 
@@ -104,8 +104,8 @@ describe('weatherReducer tests', () => {
     };
 
     let listForecastTemperature = weatherProps.forecast.list.map((testForecast) => {
-      testForecast.main.temp_max = degreesToFarenheit(testForecast.main.temp_max);
-      testForecast.main.temp_min = degreesToFarenheit(testForecast.main.temp_min);
+      testForecast.main.temp_max = celsiusToFarenheit(testForecast.main.temp_max);
+      testForecast.main.temp_min = celsiusToFarenheit(testForecast.main.temp_min);
     });
 
     let convertedForecastTemperature = { data: listForecastTemperature};
@@ -121,7 +121,41 @@ describe('weatherReducer tests', () => {
 
     let expected = {...mockStore,
       currentWeather: convertedCurrentTemperature,
-      forecastData: convertedForecastTemperature
+      forecastData: convertedForecastTemperature,
+      temperatureScale: "fahrenheit"
+    };
+
+    expect(weatherReducer(mockStore, action)).toEqual(expected);
+  });
+
+  it('should handle CONVERT_FARENHEIT_TO_DEGREES', () => {
+    let convertedCurrentTemperature = {...weatherProps.currentWeather.data,
+      main: {
+        temp_max: 75.45,
+        temp_min: 74.37
+      }
+    };
+
+    let listForecastTemperature = weatherProps.forecast.list.map((testForecast) => {
+      testForecast.main.temp_max = fahrenheitToCelsius(testForecast.main.temp_max);
+      testForecast.main.temp_min = fahrenheitToCelsius(testForecast.main.temp_min);
+    });
+
+    let convertedForecastTemperature = { data: listForecastTemperature};
+
+
+    let action = {
+      type: 'CONVERT_FARENHEIT_TO_DEGREES',
+      payload: [
+        convertedCurrentTemperature,
+        convertedForecastTemperature
+      ]
+    };
+
+    let expected = {...mockStore,
+      currentWeather: convertedCurrentTemperature,
+      forecastData: convertedForecastTemperature,
+      temperatureScale: "celsius"
     };
 
     expect(weatherReducer(mockStore, action)).toEqual(expected);

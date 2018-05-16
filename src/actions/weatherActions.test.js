@@ -9,8 +9,7 @@ import sinon from 'sinon';
 import {
   getLocationInfo,
   getCurrentWeather,
-  getFiveDayWeatherForecast,
-  convertToFarenheit
+  getFiveDayWeatherForecast
 } from './weatherActions';
 
 // fixtures
@@ -172,16 +171,6 @@ describe('Weather actions', () => {
       expect(expectedActions[5].type).toEqual(actualActions[0].type);
       done();
     });
-  });
-  it('should dispatch CONVERT_DEGREES_TO_FARENHEIT when convertToFarenheit completes successfully', () => {
-
-    let middlewares = [thunk];
-    let mockStore = configureMockStore(middlewares);
-    let store = mockStore({});
-
-    store.dispatch(convertToFarenheit(weatherProps.currentWeather, weatherProps.forecast));
-      const actualActions = store.getActions();
-      expect(expectedActions[6].type).toEqual(actualActions[0].type);
   });
 });
 

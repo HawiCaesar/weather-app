@@ -1,7 +1,6 @@
 // third-party library
 import axios from 'axios';
 
-import { degreesToFarenheit } from '../utils/degreesToFarenheit';
 import kelvinToCelsius from '../utils/kelvinToCelsius';
 
 export const getCoordinates = () => {
@@ -78,29 +77,5 @@ export const getFiveDayWeatherForecast = (cityName) => {
       }).catch((error) => {
         dispatch({ type: 'FAILED_FETCHING_WEATHER_FORECAST_INFO', payload: error });
       });
-  });
-};
-
-/**
- * Convert degrees to farenheit
- *
- * @param currentWeatherInDegrees
- * @param forecastWeatherInDegrees
- * @return {function(*)}
- */
-export const convertToFarenheit = (currentWeatherInDegrees, forecastWeatherInDegrees) => {
-  return ((dispatch) => {
-
-    currentWeatherInDegrees.data.main.temp_min = degreesToFarenheit(currentWeatherInDegrees.data.main.temp_min);
-    currentWeatherInDegrees.data.main.temp_max = degreesToFarenheit(currentWeatherInDegrees.data.main.temp_max);
-
-    forecastWeatherInDegrees.list.map((forecast) => {
-      forecast.main.temp_max = degreesToFarenheit(forecast.main.temp_max);
-      forecast.main.temp_min = degreesToFarenheit(forecast.main.temp_min);
-    });
-
-    forecastWeatherInDegrees.data = forecastWeatherInDegrees;
-
-    dispatch({ type: 'CONVERT_DEGREES_TO_FARENHEIT', payload: [currentWeatherInDegrees, forecastWeatherInDegrees] });
   });
 };

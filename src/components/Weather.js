@@ -21,6 +21,7 @@ class Weather extends React.Component {
           currentWeather={this.props.weatherDetails.currentWeather}
           forecast={this.props.weatherDetails.forecastData.data}
           convertToFarenheit={this.props.convertToFarenheit}
+          temperatureScale={this.props.weatherDetails.temperatureScale}
         />
       );
     }

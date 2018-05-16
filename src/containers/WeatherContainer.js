@@ -9,7 +9,7 @@ import { bindActionCreators } from "redux";
 import Weather from "../components/Weather";
 
 // actions
-import { getCoordinates, convertToFarenheit } from '../actions/weatherActions';
+import { getCoordinates } from '../actions/weatherActions';
 
 class WeatherContainer extends React.Component {
 
@@ -30,7 +30,6 @@ class WeatherContainer extends React.Component {
         loading={this.state.loading}
         weatherDetails={this.props.weatherDetails}
         styles={this.props.styles}
-        convertToFarenheit={this.props.convertToFarenheit}
       />
     );
   }
@@ -45,7 +44,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
-      getCoordinates: getCoordinates, convertToFarenheit: convertToFarenheit
+      getCoordinates: getCoordinates
     }, dispatch);
 }
 

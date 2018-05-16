@@ -48,4 +48,26 @@ describe('<WeatherForecast />', () => {
     wrapperTwo.setProps({ currentWeather: '' });
     expect(wrapperTwo.find('.current-weather').length).toEqual(0);
   });
+
+  it('should render the HI and LO temperature scale in degrees celisus', () => {
+    expect(wrapper.find('.current-weather').find('.celsius-scale').length).toEqual(2);
+  });
+
+  it('should render the HI and LO temperature scale in degrees fahrenheit', () => {
+    let convertedCurrentTemperature = {...weatherProps.currentWeather.data,
+      main: {
+        temp_max: 75.45,
+        temp_min: 74.37
+      }
+    };
+
+    wrapperTwo.setProps({
+      currentWeather: {
+        data: convertedCurrentTemperature
+      },
+      temperatureScale: "fahrenheit"
+    });
+
+    expect(wrapperTwo.find('.current-weather').find('.farenheit-scale').length).toEqual(2);
+  });
 });

@@ -1,6 +1,9 @@
 // react library
 import React from 'react';
 
+// component
+import SettingsContainer from "../containers/SettingsContainer";
+
 // helpers
 import {
   dateTimeExtraction,
@@ -13,8 +16,33 @@ class WeatherForecast extends React.Component {
 
 render(){
 
+  /**
+   * Return Settings Container
+   *
+   * @return {XML}
+   */
   const temperatureSettings = () => {
-    this.props.convertToFarenheit(this.props.currentWeather, this.props.forecast);
+    return (<SettingsContainer />);
+  };
+
+  /**
+   * Check temperature scale if its celsius or fahrenheit
+   *
+   * @return {XML}
+   */
+  const temperatureScale = () => {
+    if(this.props.temperatureScale !== "celsius") {
+      return (
+        <img
+          className="farenheit-scale"
+          src="https://www.shareicon.net/data/16x16/2016/02/09/716386_weather_512x512.png" />
+      );
+    }
+    return (
+      <img
+        className="celsius-scale"
+        src="https://www.shareicon.net/data/16x16/2016/02/09/716387_weather_512x512.png" />
+    );
   };
 
     /**
@@ -30,9 +58,9 @@ render(){
           <p className="text-center"> Today, {milisecondsToDateTime(this.props.currentWeather.data.dt)[0]}</p>
           <p className="text-center">Weather Now</p>
           <img src={ process.env.WEATHER_ICON_URL+weather.weather[0].icon+'.png'} />
-          <p>HI { weather.main.temp_max }</p>
-          <p>LO { weather.main.temp_min }</p>
-          <div><button onClick={temperatureSettings}>Settings</button></div>
+          <p>HI { weather.main.temp_max } {temperatureScale()}</p>
+          <p>LO { weather.main.temp_min } {temperatureScale()}</p>
+          <div>{temperatureSettings()}</div>
         </div>
       );
     }
@@ -52,8 +80,8 @@ render(){
           <div key={forecast.dt} className="col-sm-3 text-center three-hour-forecast">
             <p>Weather At {dateTimeExtraction(forecast.dt_txt)[1]}</p>
             <img src={process.env.WEATHER_ICON_URL + forecast.weather[0].icon + '.png'}/>
-            <p>HI { forecast.main.temp_max }</p>
-            <p>LO { forecast.main.temp_min }</p>
+            <p>HI { forecast.main.temp_max } {temperatureScale()}</p>
+            <p>LO { forecast.main.temp_min } {temperatureScale()}</p>
           </div>
         );
       }
@@ -73,8 +101,8 @@ render(){
               <div key={forecast.dt} className="col-sm-3 text-center five-day-forecast">
                 <p><b>{milisecondsToDateTime(forecast.dt)[0]}</b></p>
                 <img src={ process.env.WEATHER_ICON_URL+forecast.weather[0].icon+'.png'} />
-                <p>HI { forecast.main.temp_max }</p>
-                <p>LO { forecast.main.temp_min }</p>
+                <p>HI { forecast.main.temp_max } {temperatureScale()}</p>
+                <p>LO { forecast.main.temp_min } {temperatureScale()}</p>
               </div>
             );
           }

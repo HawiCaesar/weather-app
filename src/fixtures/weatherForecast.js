@@ -27,6 +27,7 @@ const threeHoursLater = (numberOfHours) => {
 
 export const weatherProps = {
   city: 'Nairobi',
+  temperatureScale: "celsius",
   currentWeather: {
     data: {
       dt: 1516620600,
