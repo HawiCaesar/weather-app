@@ -8,5 +8,5 @@ export const mockStore = {
   forecastData: null,
   currentWeather: null,
   currentWeatherError: null,
-  temperatureScale: "celisus"
+  temperatureScale: "celsius"
 };

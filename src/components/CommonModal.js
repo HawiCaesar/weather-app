@@ -23,6 +23,7 @@ class CommonModal extends React.Component {
       backgroundColor: '#303030',
       borderRadius: 5,
       width: 700,
+      color: '#FFF',
       height: 'auto',
       margin: '0 auto',
       padding: 30

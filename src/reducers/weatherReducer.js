@@ -8,7 +8,7 @@ export default function (state = {
   forecastData: null,
   currentWeather: null,
   currentWeatherError: null,
-  temperatureScale: "celisus"
+  temperatureScale: "celsius"
 }, action) {
 
   switch (action.type) {

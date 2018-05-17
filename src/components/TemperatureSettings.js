@@ -4,31 +4,23 @@ import React from 'react';
 class TemperatureSettings extends React.Component {
   render(){
     return (
-      <div>
-        <div className="form-check form-check-inline">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="tempSetting"
-            defaultChecked={this.props.celisus === true}
+      <div className="row">
+        <h3>Change Temperature Scale</h3>
+          <button
             onClick={this.props.callConvertToCelisus}
-          />
-          <div className="form-check-label">
-            Change to Degrees Celicus
-          </div>
-        </div>
-        <div className="form-check form-check-inline">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="tempSetting"
-            defaultChecked={this.props.fahrenheit === true}
-            onClick={this.props.callConvertToFahrenheit}
-          />
-          <div className="form-check-label">
-            Change to Degress Farhenheit
-          </div>
-        </div>
+            className="btn btn-primary ctemp"
+            disabled={this.props.celisus === true}
+          >
+            Celsius
+          </button>
+
+        <button
+          onClick={this.props.callConvertToFahrenheit}
+          className="btn btn-primary ftemp"
+          disabled={this.props.fahrenheit === true}
+        >
+          Fahrenhiet
+        </button>
       </div>
     );
   }
